@@ -7,6 +7,7 @@ Técnicas Avançadas de Construção de Software
 |----------------|-------------|
 | Alexandre Cunha | 202400086 |
 | Artur Oliveira | 202108663 |
+| Eduardo Areias | 202410456 |
 | Ricardo Peralta | 202206392 |
 | Rodrigo Póvoa | 202108890 |
 | Rodrigo Moucho | 202108855 |
