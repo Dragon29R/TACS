@@ -20,8 +20,8 @@ Técnicas Avançadas de Construção de Software
 
 | Metamodel | Members |
 |-------------|--------------|
-| Application | Nome 1, Nome 2 |
-| DSML | Nome 3, Nome 4 |
-| GUI | Nome 5, Nome 6 |
+| Application | Ricardo Peralta, Rodrigo Póvoa, Rodrigo Moucho |
+| DSML | Alexandre Cunha, Artur Oliveira |
+| GUI | Eduardo Areias, Tomás Macedo |
 
 ---
