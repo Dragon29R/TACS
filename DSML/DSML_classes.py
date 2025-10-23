@@ -5,20 +5,9 @@ from enum import Enum
 # Definition of Enumerations
 ############################################
 
-class ExchangeType(Enum):
-    Free = "Free"
-    Exchange = "Exchange"
-    BuyNow = "BuyNow"
-    Auction = "Auction"
-class ColorScheme(Enum):
-    Light = "Light"
-    Dark = "Dark"
-    Custom = "Custom"
-class Types(Enum):
-    int = "int"
-    str = "str"
-    double = "double"
-    bool = "bool"
+class LanguageCode(Enum):
+    en = "en"
+    pt = "pt"
 class AuthMode(Enum):
     None = "None"
     Email = "Email"
@@ -27,147 +16,45 @@ class ModerationMode(Enum):
     None = "None"
     ReportOnly = "ReportOnly"
     AdminApproval = "AdminApproval"
-class LanguageCode(Enum):
-    en = "en"
-    pt = "pt"
+class ColorScheme(Enum):
+    Light = "Light"
+    Dark = "Dark"
+    Custom = "Custom"
+class ExchangeType(Enum):
+    Free = "Free"
+    Exchange = "Exchange"
+    BuyNow = "BuyNow"
+    Auction = "Auction"
+class Types(Enum):
+    int = "int"
+    str = "str"
+    double = "double"
+    bool = "bool"
 
 
 ############################################
 # Definition of Classes
 ############################################
 
-class Additional_fields:
-
-    def __init__(self, name: str, type: Types, enabled: bool, mandatory: bool, community_fields_1: "Community_fields" = None, itemconfig_1: "ItemConfig" = None, user_fields_list_1: "User_fields_list" = None):
-        self.name = name
-        self.type = type
-        self.enabled = enabled
-        self.mandatory = mandatory
-        self.community_fields_1 = community_fields_1
-        self.itemconfig_1 = itemconfig_1
-        self.user_fields_list_1 = user_fields_list_1
-        
-    @property
-    def mandatory(self) -> bool:
-        return self.__mandatory
-
-    @mandatory.setter
-    def mandatory(self, mandatory: bool):
-        self.__mandatory = mandatory
-
-    @property
-    def name(self) -> str:
-        return self.__name
-
-    @name.setter
-    def name(self, name: str):
-        self.__name = name
-
-    @property
-    def enabled(self) -> bool:
-        return self.__enabled
-
-    @enabled.setter
-    def enabled(self, enabled: bool):
-        self.__enabled = enabled
-
-    @property
-    def type(self) -> Types:
-        return self.__type
-
-    @type.setter
-    def type(self, type: Types):
-        self.__type = type
-
-    @property
-    def user_fields_list_1(self):
-        return self.__user_fields_list_1
-
-    @user_fields_list_1.setter
-    def user_fields_list_1(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_Additional_fields__user_fields_list_1", None)
-        self.__user_fields_list_1 = value
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            if hasattr(old_value, "additional_fields_2"):
-                opp_val = getattr(old_value, "additional_fields_2", None)
-                if isinstance(opp_val, set):
-                    opp_val.discard(self)
-                
-        # Add self to new opposite end
-        if value is not None:
-            if hasattr(value, "additional_fields_2"):
-                opp_val = getattr(value, "additional_fields_2", None)
-                if opp_val is None:
-                    setattr(value, "additional_fields_2", set([self]))
-                elif isinstance(opp_val, set):
-                    opp_val.add(self)
-
-    @property
-    def itemconfig_1(self):
-        return self.__itemconfig_1
-
-    @itemconfig_1.setter
-    def itemconfig_1(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_Additional_fields__itemconfig_1", None)
-        self.__itemconfig_1 = value
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            if hasattr(old_value, "additional_fields_1"):
-                opp_val = getattr(old_value, "additional_fields_1", None)
-                if isinstance(opp_val, set):
-                    opp_val.discard(self)
-                
-        # Add self to new opposite end
-        if value is not None:
-            if hasattr(value, "additional_fields_1"):
-                opp_val = getattr(value, "additional_fields_1", None)
-                if opp_val is None:
-                    setattr(value, "additional_fields_1", set([self]))
-                elif isinstance(opp_val, set):
-                    opp_val.add(self)
-
-    @property
-    def community_fields_1(self):
-        return self.__community_fields_1
-
-    @community_fields_1.setter
-    def community_fields_1(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_Additional_fields__community_fields_1", None)
-        self.__community_fields_1 = value
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            if hasattr(old_value, "additional_fields"):
-                opp_val = getattr(old_value, "additional_fields", None)
-                if isinstance(opp_val, set):
-                    opp_val.discard(self)
-                
-        # Add self to new opposite end
-        if value is not None:
-            if hasattr(value, "additional_fields"):
-                opp_val = getattr(value, "additional_fields", None)
-                if opp_val is None:
-                    setattr(value, "additional_fields", set([self]))
-                elif isinstance(opp_val, set):
-                    opp_val.add(self)
-
 class User_fields_list:
 
-    def __init__(self, address: bool, age: bool, nickname: bool, requireEmailVerification: bool, full_name: bool, additional_fields_2: set["Additional_fields"] = None, appcustomization_4: "AppCustomization" = None):
+    def __init__(self, full_name: bool, address: bool, age: bool, nickname: bool, requireEmailVerification: bool, appcustomization_4: "AppCustomization" = None, additional_fields_2: set["Additional_fields"] = None):
+        self.full_name = full_name
         self.address = address
         self.age = age
         self.nickname = nickname
         self.requireEmailVerification = requireEmailVerification
-        self.full_name = full_name
-        self.additional_fields_2 = additional_fields_2 if additional_fields_2 is not None else set()
         self.appcustomization_4 = appcustomization_4
+        self.additional_fields_2 = additional_fields_2 if additional_fields_2 is not None else set()
         
+    @property
+    def nickname(self) -> bool:
+        return self.__nickname
+
+    @nickname.setter
+    def nickname(self, nickname: bool):
+        self.__nickname = nickname
+
     @property
     def full_name(self) -> bool:
         return self.__full_name
@@ -175,6 +62,14 @@ class User_fields_list:
     @full_name.setter
     def full_name(self, full_name: bool):
         self.__full_name = full_name
+
+    @property
+    def address(self) -> bool:
+        return self.__address
+
+    @address.setter
+    def address(self, address: bool):
+        self.__address = address
 
     @property
     def age(self) -> bool:
@@ -193,20 +88,27 @@ class User_fields_list:
         self.__requireEmailVerification = requireEmailVerification
 
     @property
-    def nickname(self) -> bool:
-        return self.__nickname
+    def appcustomization_4(self):
+        return self.__appcustomization_4
 
-    @nickname.setter
-    def nickname(self, nickname: bool):
-        self.__nickname = nickname
-
-    @property
-    def address(self) -> bool:
-        return self.__address
-
-    @address.setter
-    def address(self, address: bool):
-        self.__address = address
+    @appcustomization_4.setter
+    def appcustomization_4(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_User_fields_list__appcustomization_4", None)
+        self.__appcustomization_4 = value
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            if hasattr(old_value, "user_fields_list"):
+                opp_val = getattr(old_value, "user_fields_list", None)
+                if opp_val == self:
+                    setattr(old_value, "user_fields_list", None)
+                
+        # Add self to new opposite end
+        if value is not None:
+            if hasattr(value, "user_fields_list"):
+                opp_val = getattr(value, "user_fields_list", None)
+                setattr(value, "user_fields_list", self)
 
     @property
     def additional_fields_2(self):
@@ -236,29 +138,6 @@ class User_fields_list:
                     setattr(item, "user_fields_list_1", self)
                     
 
-    @property
-    def appcustomization_4(self):
-        return self.__appcustomization_4
-
-    @appcustomization_4.setter
-    def appcustomization_4(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_User_fields_list__appcustomization_4", None)
-        self.__appcustomization_4 = value
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            if hasattr(old_value, "user_fields_list"):
-                opp_val = getattr(old_value, "user_fields_list", None)
-                if opp_val == self:
-                    setattr(old_value, "user_fields_list", None)
-                
-        # Add self to new opposite end
-        if value is not None:
-            if hasattr(value, "user_fields_list"):
-                opp_val = getattr(value, "user_fields_list", None)
-                setattr(value, "user_fields_list", self)
-
 class Features:
 
     def __init__(self, enableChat: bool, enableRatings: bool, enableNotifications: bool, moderationMode: ModerationMode, authMode: AuthMode, enableAnalytics: bool, enableItemCategories: bool, appcustomization_1: "AppCustomization" = None):
@@ -272,12 +151,12 @@ class Features:
         self.appcustomization_1 = appcustomization_1
         
     @property
-    def authMode(self) -> AuthMode:
-        return self.__authMode
+    def enableChat(self) -> bool:
+        return self.__enableChat
 
-    @authMode.setter
-    def authMode(self, authMode: AuthMode):
-        self.__authMode = authMode
+    @enableChat.setter
+    def enableChat(self, enableChat: bool):
+        self.__enableChat = enableChat
 
     @property
     def moderationMode(self) -> ModerationMode:
@@ -296,22 +175,6 @@ class Features:
         self.__enableRatings = enableRatings
 
     @property
-    def enableAnalytics(self) -> bool:
-        return self.__enableAnalytics
-
-    @enableAnalytics.setter
-    def enableAnalytics(self, enableAnalytics: bool):
-        self.__enableAnalytics = enableAnalytics
-
-    @property
-    def enableChat(self) -> bool:
-        return self.__enableChat
-
-    @enableChat.setter
-    def enableChat(self, enableChat: bool):
-        self.__enableChat = enableChat
-
-    @property
     def enableNotifications(self) -> bool:
         return self.__enableNotifications
 
@@ -320,12 +183,28 @@ class Features:
         self.__enableNotifications = enableNotifications
 
     @property
+    def enableAnalytics(self) -> bool:
+        return self.__enableAnalytics
+
+    @enableAnalytics.setter
+    def enableAnalytics(self, enableAnalytics: bool):
+        self.__enableAnalytics = enableAnalytics
+
+    @property
     def enableItemCategories(self) -> bool:
         return self.__enableItemCategories
 
     @enableItemCategories.setter
     def enableItemCategories(self, enableItemCategories: bool):
         self.__enableItemCategories = enableItemCategories
+
+    @property
+    def authMode(self) -> AuthMode:
+        return self.__authMode
+
+    @authMode.setter
+    def authMode(self, authMode: AuthMode):
+        self.__authMode = authMode
 
     @property
     def appcustomization_1(self):
@@ -352,14 +231,13 @@ class Features:
 
 class Community:
 
-    def __init__(self, name: str, color: str, logo: Path, maxUsers: int, allowSubcommunities: bool, rules: str, parentCommunity: Community, defaultLanguage: LanguageCode, appcustomization_2: "AppCustomization" = None, parentCommunity: "Community" = None, subCommunities: set["Community"] = None, language: set["Language"] = None, domain: set["Domain"] = None):
+    def __init__(self, name: str, color: str, logo: Path, maxUsers: int, allowSubcommunities: bool, rules: str, defaultLanguage: LanguageCode, appcustomization_2: "AppCustomization" = None, parentCommunity: "Community" = None, subCommunities: set["Community"] = None, language: set["Language"] = None, domain: set["Domain"] = None):
         self.name = name
         self.color = color
         self.logo = logo
         self.maxUsers = maxUsers
         self.allowSubcommunities = allowSubcommunities
         self.rules = rules
-        self.parentCommunity = parentCommunity
         self.defaultLanguage = defaultLanguage
         self.appcustomization_2 = appcustomization_2
         self.parentCommunity = parentCommunity
@@ -368,52 +246,12 @@ class Community:
         self.domain = domain if domain is not None else set()
         
     @property
-    def parentCommunity(self) -> Community:
-        return self.__parentCommunity
-
-    @parentCommunity.setter
-    def parentCommunity(self, parentCommunity: Community):
-        self.__parentCommunity = parentCommunity
-
-    @property
-    def defaultLanguage(self) -> LanguageCode:
-        return self.__defaultLanguage
-
-    @defaultLanguage.setter
-    def defaultLanguage(self, defaultLanguage: LanguageCode):
-        self.__defaultLanguage = defaultLanguage
-
-    @property
     def color(self) -> str:
         return self.__color
 
     @color.setter
     def color(self, color: str):
         self.__color = color
-
-    @property
-    def name(self) -> str:
-        return self.__name
-
-    @name.setter
-    def name(self, name: str):
-        self.__name = name
-
-    @property
-    def allowSubcommunities(self) -> bool:
-        return self.__allowSubcommunities
-
-    @allowSubcommunities.setter
-    def allowSubcommunities(self, allowSubcommunities: bool):
-        self.__allowSubcommunities = allowSubcommunities
-
-    @property
-    def logo(self) -> Path:
-        return self.__logo
-
-    @logo.setter
-    def logo(self, logo: Path):
-        self.__logo = logo
 
     @property
     def maxUsers(self) -> int:
@@ -424,12 +262,72 @@ class Community:
         self.__maxUsers = maxUsers
 
     @property
+    def name(self) -> str:
+        return self.__name
+
+    @name.setter
+    def name(self, name: str):
+        self.__name = name
+
+    @property
+    def defaultLanguage(self) -> LanguageCode:
+        return self.__defaultLanguage
+
+    @defaultLanguage.setter
+    def defaultLanguage(self, defaultLanguage: LanguageCode):
+        self.__defaultLanguage = defaultLanguage
+
+    @property
     def rules(self) -> str:
         return self.__rules
 
     @rules.setter
     def rules(self, rules: str):
         self.__rules = rules
+
+    @property
+    def logo(self) -> Path:
+        return self.__logo
+
+    @logo.setter
+    def logo(self, logo: Path):
+        self.__logo = logo
+
+    @property
+    def allowSubcommunities(self) -> bool:
+        return self.__allowSubcommunities
+
+    @allowSubcommunities.setter
+    def allowSubcommunities(self, allowSubcommunities: bool):
+        self.__allowSubcommunities = allowSubcommunities
+
+    @property
+    def domain(self):
+        return self.__domain
+
+    @domain.setter
+    def domain(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_Community__domain", None)
+        self.__domain = value if value is not None else set()
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            for item in old_value:
+                if hasattr(item, "community_2"):
+                    opp_val = getattr(item, "community_2", None)
+                    
+                    if opp_val == self:
+                        setattr(item, "community_2", None)
+                    
+        # Add self to new opposite end
+        if value is not None:
+            for item in value:
+                if hasattr(item, "community_2"):
+                    opp_val = getattr(item, "community_2", None)
+                    
+                    setattr(item, "community_2", self)
+                    
 
     @property
     def parentCommunity(self):
@@ -456,57 +354,6 @@ class Community:
                     setattr(value, "subCommunities", set([self]))
                 elif isinstance(opp_val, set):
                     opp_val.add(self)
-
-    @property
-    def language(self):
-        return self.__language
-
-    @language.setter
-    def language(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_Community__language", None)
-        self.__language = value if value is not None else set()
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            for item in old_value:
-                if hasattr(item, "community_1"):
-                    opp_val = getattr(item, "community_1", None)
-                    
-                    if opp_val == self:
-                        setattr(item, "community_1", None)
-                    
-        # Add self to new opposite end
-        if value is not None:
-            for item in value:
-                if hasattr(item, "community_1"):
-                    opp_val = getattr(item, "community_1", None)
-                    
-                    setattr(item, "community_1", self)
-                    
-
-    @property
-    def appcustomization_2(self):
-        return self.__appcustomization_2
-
-    @appcustomization_2.setter
-    def appcustomization_2(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_Community__appcustomization_2", None)
-        self.__appcustomization_2 = value
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            if hasattr(old_value, "community"):
-                opp_val = getattr(old_value, "community", None)
-                if opp_val == self:
-                    setattr(old_value, "community", None)
-                
-        # Add self to new opposite end
-        if value is not None:
-            if hasattr(value, "community"):
-                opp_val = getattr(value, "community", None)
-                setattr(value, "community", self)
 
     @property
     def subCommunities(self):
@@ -537,31 +384,54 @@ class Community:
                     
 
     @property
-    def domain(self):
-        return self.__domain
+    def appcustomization_2(self):
+        return self.__appcustomization_2
 
-    @domain.setter
-    def domain(self, value):
+    @appcustomization_2.setter
+    def appcustomization_2(self, value):
         # Bidirectional consistency
-        old_value = getattr(self, f"_Community__domain", None)
-        self.__domain = value if value is not None else set()
+        old_value = getattr(self, f"_Community__appcustomization_2", None)
+        self.__appcustomization_2 = value
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            if hasattr(old_value, "community"):
+                opp_val = getattr(old_value, "community", None)
+                if opp_val == self:
+                    setattr(old_value, "community", None)
+                
+        # Add self to new opposite end
+        if value is not None:
+            if hasattr(value, "community"):
+                opp_val = getattr(value, "community", None)
+                setattr(value, "community", self)
+
+    @property
+    def language(self):
+        return self.__language
+
+    @language.setter
+    def language(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_Community__language", None)
+        self.__language = value if value is not None else set()
         
         # Remove self from old opposite end
         if old_value is not None:
             for item in old_value:
-                if hasattr(item, "community_2"):
-                    opp_val = getattr(item, "community_2", None)
+                if hasattr(item, "community_1"):
+                    opp_val = getattr(item, "community_1", None)
                     
                     if opp_val == self:
-                        setattr(item, "community_2", None)
+                        setattr(item, "community_1", None)
                     
         # Add self to new opposite end
         if value is not None:
             for item in value:
-                if hasattr(item, "community_2"):
-                    opp_val = getattr(item, "community_2", None)
+                if hasattr(item, "community_1"):
+                    opp_val = getattr(item, "community_1", None)
                     
-                    setattr(item, "community_2", self)
+                    setattr(item, "community_1", self)
                     
 
 class ItemExchange:
@@ -606,19 +476,11 @@ class ItemExchange:
 
 class Language:
 
-    def __init__(self, code: LanguageCode, name: str, community_1: "Community" = None):
-        self.code = code
+    def __init__(self, name: str, code: LanguageCode, community_1: "Community" = None):
         self.name = name
+        self.code = code
         self.community_1 = community_1
         
-    @property
-    def code(self) -> LanguageCode:
-        return self.__code
-
-    @code.setter
-    def code(self, code: LanguageCode):
-        self.__code = code
-
     @property
     def name(self) -> str:
         return self.__name
@@ -626,6 +488,14 @@ class Language:
     @name.setter
     def name(self, name: str):
         self.__name = name
+
+    @property
+    def code(self) -> LanguageCode:
+        return self.__code
+
+    @code.setter
+    def code(self, code: LanguageCode):
+        self.__code = code
 
     @property
     def community_1(self):
@@ -718,12 +588,28 @@ class ThemeConfig:
         self.appcustomization_3 = appcustomization_3
         
     @property
+    def fontFamily(self) -> str:
+        return self.__fontFamily
+
+    @fontFamily.setter
+    def fontFamily(self, fontFamily: str):
+        self.__fontFamily = fontFamily
+
+    @property
     def logoPath(self) -> Path:
         return self.__logoPath
 
     @logoPath.setter
     def logoPath(self, logoPath: Path):
         self.__logoPath = logoPath
+
+    @property
+    def colorScheme(self) -> ColorScheme:
+        return self.__colorScheme
+
+    @colorScheme.setter
+    def colorScheme(self, colorScheme: ColorScheme):
+        self.__colorScheme = colorScheme
 
     @property
     def primaryColor(self) -> str:
@@ -740,22 +626,6 @@ class ThemeConfig:
     @accentColor.setter
     def accentColor(self, accentColor: str):
         self.__accentColor = accentColor
-
-    @property
-    def fontFamily(self) -> str:
-        return self.__fontFamily
-
-    @fontFamily.setter
-    def fontFamily(self, fontFamily: str):
-        self.__fontFamily = fontFamily
-
-    @property
-    def colorScheme(self) -> ColorScheme:
-        return self.__colorScheme
-
-    @colorScheme.setter
-    def colorScheme(self, colorScheme: ColorScheme):
-        self.__colorScheme = colorScheme
 
     @property
     def backgroundImage(self) -> Path:
@@ -790,14 +660,14 @@ class ThemeConfig:
 
 class AppCustomization:
 
-    def __init__(self, communityConfig: Community_fields, theme: ThemeConfig, name: str, community: Community, features: Features, userConfig: User_fields_list, itemConfig: ItemConfig, itemconfig: "ItemConfig" = None, features: "Features" = None, community: "Community" = None, themeconfig: "ThemeConfig" = None, user_fields_list: "User_fields_list" = None, community_fields: "Community_fields" = None):
-        self.communityConfig = communityConfig
-        self.theme = theme
+    def __init__(self, name: str, community: Community, features: Features, userConfig: User_fields_list, itemConfig: ItemConfig, communityConfig: Community_fields, theme: ThemeConfig, itemconfig: "ItemConfig" = None, features: "Features" = None, community: "Community" = None, themeconfig: "ThemeConfig" = None, user_fields_list: "User_fields_list" = None, community_fields: "Community_fields" = None):
         self.name = name
         self.community = community
         self.features = features
         self.userConfig = userConfig
         self.itemConfig = itemConfig
+        self.communityConfig = communityConfig
+        self.theme = theme
         self.itemconfig = itemconfig
         self.features = features
         self.community = community
@@ -806,12 +676,12 @@ class AppCustomization:
         self.community_fields = community_fields
         
     @property
-    def name(self) -> str:
-        return self.__name
+    def community(self) -> Community:
+        return self.__community
 
-    @name.setter
-    def name(self, name: str):
-        self.__name = name
+    @community.setter
+    def community(self, community: Community):
+        self.__community = community
 
     @property
     def theme(self) -> ThemeConfig:
@@ -822,28 +692,20 @@ class AppCustomization:
         self.__theme = theme
 
     @property
-    def itemConfig(self) -> ItemConfig:
-        return self.__itemConfig
-
-    @itemConfig.setter
-    def itemConfig(self, itemConfig: ItemConfig):
-        self.__itemConfig = itemConfig
-
-    @property
-    def communityConfig(self) -> Community_fields:
-        return self.__communityConfig
-
-    @communityConfig.setter
-    def communityConfig(self, communityConfig: Community_fields):
-        self.__communityConfig = communityConfig
-
-    @property
     def userConfig(self) -> User_fields_list:
         return self.__userConfig
 
     @userConfig.setter
     def userConfig(self, userConfig: User_fields_list):
         self.__userConfig = userConfig
+
+    @property
+    def name(self) -> str:
+        return self.__name
+
+    @name.setter
+    def name(self, name: str):
+        self.__name = name
 
     @property
     def features(self) -> Features:
@@ -854,35 +716,20 @@ class AppCustomization:
         self.__features = features
 
     @property
-    def community(self) -> Community:
-        return self.__community
+    def communityConfig(self) -> Community_fields:
+        return self.__communityConfig
 
-    @community.setter
-    def community(self, community: Community):
-        self.__community = community
+    @communityConfig.setter
+    def communityConfig(self, communityConfig: Community_fields):
+        self.__communityConfig = communityConfig
 
     @property
-    def features(self):
-        return self.__features
+    def itemConfig(self) -> ItemConfig:
+        return self.__itemConfig
 
-    @features.setter
-    def features(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_AppCustomization__features", None)
-        self.__features = value
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            if hasattr(old_value, "appcustomization_1"):
-                opp_val = getattr(old_value, "appcustomization_1", None)
-                if opp_val == self:
-                    setattr(old_value, "appcustomization_1", None)
-                
-        # Add self to new opposite end
-        if value is not None:
-            if hasattr(value, "appcustomization_1"):
-                opp_val = getattr(value, "appcustomization_1", None)
-                setattr(value, "appcustomization_1", self)
+    @itemConfig.setter
+    def itemConfig(self, itemConfig: ItemConfig):
+        self.__itemConfig = itemConfig
 
     @property
     def themeconfig(self):
@@ -908,27 +755,27 @@ class AppCustomization:
                 setattr(value, "appcustomization_3", self)
 
     @property
-    def community(self):
-        return self.__community
+    def itemconfig(self):
+        return self.__itemconfig
 
-    @community.setter
-    def community(self, value):
+    @itemconfig.setter
+    def itemconfig(self, value):
         # Bidirectional consistency
-        old_value = getattr(self, f"_AppCustomization__community", None)
-        self.__community = value
+        old_value = getattr(self, f"_AppCustomization__itemconfig", None)
+        self.__itemconfig = value
         
         # Remove self from old opposite end
         if old_value is not None:
-            if hasattr(old_value, "appcustomization_2"):
-                opp_val = getattr(old_value, "appcustomization_2", None)
+            if hasattr(old_value, "appcustomization"):
+                opp_val = getattr(old_value, "appcustomization", None)
                 if opp_val == self:
-                    setattr(old_value, "appcustomization_2", None)
+                    setattr(old_value, "appcustomization", None)
                 
         # Add self to new opposite end
         if value is not None:
-            if hasattr(value, "appcustomization_2"):
-                opp_val = getattr(value, "appcustomization_2", None)
-                setattr(value, "appcustomization_2", self)
+            if hasattr(value, "appcustomization"):
+                opp_val = getattr(value, "appcustomization", None)
+                setattr(value, "appcustomization", self)
 
     @property
     def user_fields_list(self):
@@ -954,6 +801,29 @@ class AppCustomization:
                 setattr(value, "appcustomization_4", self)
 
     @property
+    def features(self):
+        return self.__features
+
+    @features.setter
+    def features(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_AppCustomization__features", None)
+        self.__features = value
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            if hasattr(old_value, "appcustomization_1"):
+                opp_val = getattr(old_value, "appcustomization_1", None)
+                if opp_val == self:
+                    setattr(old_value, "appcustomization_1", None)
+                
+        # Add self to new opposite end
+        if value is not None:
+            if hasattr(value, "appcustomization_1"):
+                opp_val = getattr(value, "appcustomization_1", None)
+                setattr(value, "appcustomization_1", self)
+
+    @property
     def community_fields(self):
         return self.__community_fields
 
@@ -977,31 +847,31 @@ class AppCustomization:
                 setattr(value, "appcustomization_5", self)
 
     @property
-    def itemconfig(self):
-        return self.__itemconfig
+    def community(self):
+        return self.__community
 
-    @itemconfig.setter
-    def itemconfig(self, value):
+    @community.setter
+    def community(self, value):
         # Bidirectional consistency
-        old_value = getattr(self, f"_AppCustomization__itemconfig", None)
-        self.__itemconfig = value
+        old_value = getattr(self, f"_AppCustomization__community", None)
+        self.__community = value
         
         # Remove self from old opposite end
         if old_value is not None:
-            if hasattr(old_value, "appcustomization"):
-                opp_val = getattr(old_value, "appcustomization", None)
+            if hasattr(old_value, "appcustomization_2"):
+                opp_val = getattr(old_value, "appcustomization_2", None)
                 if opp_val == self:
-                    setattr(old_value, "appcustomization", None)
+                    setattr(old_value, "appcustomization_2", None)
                 
         # Add self to new opposite end
         if value is not None:
-            if hasattr(value, "appcustomization"):
-                opp_val = getattr(value, "appcustomization", None)
-                setattr(value, "appcustomization", self)
+            if hasattr(value, "appcustomization_2"):
+                opp_val = getattr(value, "appcustomization_2", None)
+                setattr(value, "appcustomization_2", self)
 
 class ItemConfig:
 
-    def __init__(self, enableBiddingTimer: bool, enableBuyNowPrice: bool, enableItemImages: bool, maxItemPhotos: int, enableItemLocation: bool, enableDeliveryOptions: bool, appcustomization: "AppCustomization" = None, additional_fields_1: set["Additional_fields"] = None, itemexchange: set["ItemExchange"] = None):
+    def __init__(self, enableBiddingTimer: bool, enableBuyNowPrice: bool, enableItemImages: bool, maxItemPhotos: int, enableItemLocation: bool, enableDeliveryOptions: bool, appcustomization: "AppCustomization" = None, itemexchange: set["ItemExchange"] = None, additional_fields_1: set["Additional_fields"] = None):
         self.enableBiddingTimer = enableBiddingTimer
         self.enableBuyNowPrice = enableBuyNowPrice
         self.enableItemImages = enableItemImages
@@ -1009,9 +879,25 @@ class ItemConfig:
         self.enableItemLocation = enableItemLocation
         self.enableDeliveryOptions = enableDeliveryOptions
         self.appcustomization = appcustomization
-        self.additional_fields_1 = additional_fields_1 if additional_fields_1 is not None else set()
         self.itemexchange = itemexchange if itemexchange is not None else set()
+        self.additional_fields_1 = additional_fields_1 if additional_fields_1 is not None else set()
         
+    @property
+    def enableDeliveryOptions(self) -> bool:
+        return self.__enableDeliveryOptions
+
+    @enableDeliveryOptions.setter
+    def enableDeliveryOptions(self, enableDeliveryOptions: bool):
+        self.__enableDeliveryOptions = enableDeliveryOptions
+
+    @property
+    def maxItemPhotos(self) -> int:
+        return self.__maxItemPhotos
+
+    @maxItemPhotos.setter
+    def maxItemPhotos(self, maxItemPhotos: int):
+        self.__maxItemPhotos = maxItemPhotos
+
     @property
     def enableBuyNowPrice(self) -> bool:
         return self.__enableBuyNowPrice
@@ -1029,14 +915,6 @@ class ItemConfig:
         self.__enableItemImages = enableItemImages
 
     @property
-    def maxItemPhotos(self) -> int:
-        return self.__maxItemPhotos
-
-    @maxItemPhotos.setter
-    def maxItemPhotos(self, maxItemPhotos: int):
-        self.__maxItemPhotos = maxItemPhotos
-
-    @property
     def enableItemLocation(self) -> bool:
         return self.__enableItemLocation
 
@@ -1045,43 +923,12 @@ class ItemConfig:
         self.__enableItemLocation = enableItemLocation
 
     @property
-    def enableDeliveryOptions(self) -> bool:
-        return self.__enableDeliveryOptions
-
-    @enableDeliveryOptions.setter
-    def enableDeliveryOptions(self, enableDeliveryOptions: bool):
-        self.__enableDeliveryOptions = enableDeliveryOptions
-
-    @property
     def enableBiddingTimer(self) -> bool:
         return self.__enableBiddingTimer
 
     @enableBiddingTimer.setter
     def enableBiddingTimer(self, enableBiddingTimer: bool):
         self.__enableBiddingTimer = enableBiddingTimer
-
-    @property
-    def appcustomization(self):
-        return self.__appcustomization
-
-    @appcustomization.setter
-    def appcustomization(self, value):
-        # Bidirectional consistency
-        old_value = getattr(self, f"_ItemConfig__appcustomization", None)
-        self.__appcustomization = value
-        
-        # Remove self from old opposite end
-        if old_value is not None:
-            if hasattr(old_value, "itemconfig"):
-                opp_val = getattr(old_value, "itemconfig", None)
-                if opp_val == self:
-                    setattr(old_value, "itemconfig", None)
-                
-        # Add self to new opposite end
-        if value is not None:
-            if hasattr(value, "itemconfig"):
-                opp_val = getattr(value, "itemconfig", None)
-                setattr(value, "itemconfig", self)
 
     @property
     def itemexchange(self):
@@ -1139,6 +986,29 @@ class ItemConfig:
                     setattr(item, "itemconfig_1", self)
                     
 
+    @property
+    def appcustomization(self):
+        return self.__appcustomization
+
+    @appcustomization.setter
+    def appcustomization(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_ItemConfig__appcustomization", None)
+        self.__appcustomization = value
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            if hasattr(old_value, "itemconfig"):
+                opp_val = getattr(old_value, "itemconfig", None)
+                if opp_val == self:
+                    setattr(old_value, "itemconfig", None)
+                
+        # Add self to new opposite end
+        if value is not None:
+            if hasattr(value, "itemconfig"):
+                opp_val = getattr(value, "itemconfig", None)
+                setattr(value, "itemconfig", self)
+
 class Community_fields:
 
     def __init__(self, locale: bool, description: bool, appcustomization_5: "AppCustomization" = None, additional_fields: set["Additional_fields"] = None):
@@ -1148,6 +1018,14 @@ class Community_fields:
         self.additional_fields = additional_fields if additional_fields is not None else set()
         
     @property
+    def description(self) -> bool:
+        return self.__description
+
+    @description.setter
+    def description(self, description: bool):
+        self.__description = description
+
+    @property
     def locale(self) -> bool:
         return self.__locale
 
@@ -1156,12 +1034,27 @@ class Community_fields:
         self.__locale = locale
 
     @property
-    def description(self) -> bool:
-        return self.__description
+    def appcustomization_5(self):
+        return self.__appcustomization_5
 
-    @description.setter
-    def description(self, description: bool):
-        self.__description = description
+    @appcustomization_5.setter
+    def appcustomization_5(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_Community_fields__appcustomization_5", None)
+        self.__appcustomization_5 = value
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            if hasattr(old_value, "community_fields"):
+                opp_val = getattr(old_value, "community_fields", None)
+                if opp_val == self:
+                    setattr(old_value, "community_fields", None)
+                
+        # Add self to new opposite end
+        if value is not None:
+            if hasattr(value, "community_fields"):
+                opp_val = getattr(value, "community_fields", None)
+                setattr(value, "community_fields", self)
 
     @property
     def additional_fields(self):
@@ -1191,25 +1084,123 @@ class Community_fields:
                     setattr(item, "community_fields_1", self)
                     
 
-    @property
-    def appcustomization_5(self):
-        return self.__appcustomization_5
+class Additional_fields:
 
-    @appcustomization_5.setter
-    def appcustomization_5(self, value):
+    def __init__(self, type: Types, enabled: bool, mandatory: bool, name: str, community_fields_1: "Community_fields" = None, itemconfig_1: "ItemConfig" = None, user_fields_list_1: "User_fields_list" = None):
+        self.type = type
+        self.enabled = enabled
+        self.mandatory = mandatory
+        self.name = name
+        self.community_fields_1 = community_fields_1
+        self.itemconfig_1 = itemconfig_1
+        self.user_fields_list_1 = user_fields_list_1
+        
+    @property
+    def enabled(self) -> bool:
+        return self.__enabled
+
+    @enabled.setter
+    def enabled(self, enabled: bool):
+        self.__enabled = enabled
+
+    @property
+    def name(self) -> str:
+        return self.__name
+
+    @name.setter
+    def name(self, name: str):
+        self.__name = name
+
+    @property
+    def mandatory(self) -> bool:
+        return self.__mandatory
+
+    @mandatory.setter
+    def mandatory(self, mandatory: bool):
+        self.__mandatory = mandatory
+
+    @property
+    def type(self) -> Types:
+        return self.__type
+
+    @type.setter
+    def type(self, type: Types):
+        self.__type = type
+
+    @property
+    def user_fields_list_1(self):
+        return self.__user_fields_list_1
+
+    @user_fields_list_1.setter
+    def user_fields_list_1(self, value):
         # Bidirectional consistency
-        old_value = getattr(self, f"_Community_fields__appcustomization_5", None)
-        self.__appcustomization_5 = value
+        old_value = getattr(self, f"_Additional_fields__user_fields_list_1", None)
+        self.__user_fields_list_1 = value
         
         # Remove self from old opposite end
         if old_value is not None:
-            if hasattr(old_value, "community_fields"):
-                opp_val = getattr(old_value, "community_fields", None)
-                if opp_val == self:
-                    setattr(old_value, "community_fields", None)
+            if hasattr(old_value, "additional_fields_2"):
+                opp_val = getattr(old_value, "additional_fields_2", None)
+                if isinstance(opp_val, set):
+                    opp_val.discard(self)
                 
         # Add self to new opposite end
         if value is not None:
-            if hasattr(value, "community_fields"):
-                opp_val = getattr(value, "community_fields", None)
-                setattr(value, "community_fields", self)
+            if hasattr(value, "additional_fields_2"):
+                opp_val = getattr(value, "additional_fields_2", None)
+                if opp_val is None:
+                    setattr(value, "additional_fields_2", set([self]))
+                elif isinstance(opp_val, set):
+                    opp_val.add(self)
+
+    @property
+    def community_fields_1(self):
+        return self.__community_fields_1
+
+    @community_fields_1.setter
+    def community_fields_1(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_Additional_fields__community_fields_1", None)
+        self.__community_fields_1 = value
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            if hasattr(old_value, "additional_fields"):
+                opp_val = getattr(old_value, "additional_fields", None)
+                if isinstance(opp_val, set):
+                    opp_val.discard(self)
+                
+        # Add self to new opposite end
+        if value is not None:
+            if hasattr(value, "additional_fields"):
+                opp_val = getattr(value, "additional_fields", None)
+                if opp_val is None:
+                    setattr(value, "additional_fields", set([self]))
+                elif isinstance(opp_val, set):
+                    opp_val.add(self)
+
+    @property
+    def itemconfig_1(self):
+        return self.__itemconfig_1
+
+    @itemconfig_1.setter
+    def itemconfig_1(self, value):
+        # Bidirectional consistency
+        old_value = getattr(self, f"_Additional_fields__itemconfig_1", None)
+        self.__itemconfig_1 = value
+        
+        # Remove self from old opposite end
+        if old_value is not None:
+            if hasattr(old_value, "additional_fields_1"):
+                opp_val = getattr(old_value, "additional_fields_1", None)
+                if isinstance(opp_val, set):
+                    opp_val.discard(self)
+                
+        # Add self to new opposite end
+        if value is not None:
+            if hasattr(value, "additional_fields_1"):
+                opp_val = getattr(value, "additional_fields_1", None)
+                if opp_val is None:
+                    setattr(value, "additional_fields_1", set([self]))
+                elif isinstance(opp_val, set):
+                    opp_val.add(self)
