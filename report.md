@@ -34,3 +34,12 @@ In terms of functional and nonfunctional features we thought the best optional f
 For this delivery we kept GUI customization were kept to a single class (ThemeConfig) which allows the user simple customization of the platform such as, the color schema(Light, Darl, Custom) to be used, the primary color and accent color of the website and mobile app, the font and finnaly the background image.
 
 With all this considerations we arrived at the following DSML model which gives the user a flexible way to customize their platform.
+
+
+### GUI
+
+We designed the GUI metamodel in order to provide a flexible but structured basis for the visual, interactive layer of our community-based application. The structural model defines core entities such as User, Item, Community, and Transaction, but the GUI metamodel describes how the user visually navigates and interacts with these concepts. We grounded our design in component-driven UI architectures such as MVC, React, and Angular by dividing the interface into screens, containers, and smaller reusable components, in order to achieve separation of concerns, maintainability, and consistency.
+
+At the center lies the GUIModel class, which is responsible for structuring screens such as LoginScreen, HomeScreen, CreateListingScreen, ListingDetailScreen, AuctionScreen, ProfileScreen, SearchResultsScreen, and ChatScreen. Each screen represents an important function of the system, which is structured by the structural model. Screens are composed of ViewContainers and ViewComponents (such as buttons, forms, and images) in order to be modular and reusable. Specific components, such as Image, Menu, and Form, are used for specific marketplace functionality. Optional components use the “?” notation, in order to handle dynamic contexts; for example, showing a duration field only for an auction listing.
+
+We also standardized component properties using enumerations, such as ScreenType, InputFieldType, and ButtonActionType, for a consistent design vocabulary.
