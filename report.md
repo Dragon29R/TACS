@@ -27,7 +27,7 @@ We started by looking into how platforms like eBay work with the concept of a Us
 
 First with the app customization we researched what functional and nonfunctional requirements that we need for the base app, things like name, what community it represents and what sub-communities it can have, what features make sense to be optional, what is the visual theme, and what features and functionality each entity (Item, User, Community) should have. 
 
-Then we looked at the items and concluded that they have multiple ways of being transacted, the most common is the exchange for money but platforms like eBay also allow users to auction items or both, using thia as inpiration we added the possibility for an item to be auctioned, traded for another item or just given for free as choices during customization. These features can be selected freely allowing more freedom in the personalization of the platform and allowing every platform created to handle multiple use cases.
+Then we looked at the items and concluded that they have multiple ways of being transacted, the most common is the exchange for money but platforms like eBay also allow users to auction items or both, using this as inpiration we added the possibility for an item to be auctioned, traded for another item or just given for free as choices during customization. These features can be selected freely allowing more freedom in the personalization of the platform and allowing every platform created to handle multiple use cases.
 
 In terms of functional and nonfunctional features we thought the best optional features would be Chat, Ratings, Moderation and Item Categories which are commonly seen features on selling websites.
 
