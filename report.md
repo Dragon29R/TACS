@@ -19,4 +19,4 @@ The model aims to balance conceptual generality with applicable specificity to c
 
 The main methods were also added, particularly for the most important classes in the model.For instance, the User class will be able to create an item, edit his profile or join/create a community. Besides that, an Item can have its details updated, a Transaction can change its status and a Community possesses many methods for simple yet effective management.
 
-Lastly, limitations and constraints were added to improve model robustness.
+Lastly, limitations and constraints were added to improve model validity.
