@@ -20,3 +20,17 @@ The model aims to balance conceptual generality with applicable specificity to c
 The main methods were also added, particularly for the most important classes in the model.For instance, the User class will be able to create an item, edit his profile or join/create a community. Besides that, an Item can have its details updated, a Transaction can change its status and a Community possesses many methods for simple yet effective management.
 
 Lastly, limitations and constraints were added to improve model validity.
+
+### DSML
+
+We started by looking into how platforms like eBay work with the concept of a User creating an account, that same user can list, check and buy items and everything that revolves around that.
+
+First with the app customization we researched what functional and nonfunctional requirements that we need for the base app, things like name, what community it represents and what sub-communities it can have, what features make sense to be optional, what is the visual theme, and what features and functionality each entity (Item, User, Community) should have. 
+
+Then we looked at the items and concluded that they have multiple ways of being transacted, the most common is the exchange for money but platforms like eBay also allow users to auction items or both, using thia as inpiration we added the possibility for an item to be auctioned, traded for another item or just given for free as choices during customization. These features can be selected freely allowing more freedom in the personalization of the platform and allowing every platform created to handle multiple use cases.
+
+In terms of functional and nonfunctional features we thought the best optional features would be Chat, Ratings, Moderation and Item Categories which are commonly seen features on selling websites.
+
+For this delivery we kept GUI customization were kept to a single class (ThemeConfig) which allows the user simple customization of the platform such as, the color schema(Light, Darl, Custom) to be used, the primary color and accent color of the website and mobile app, the font and finnaly the background image.
+
+With all this considerations we arrived at the following DSML model which gives the user a flexible way to customize their platform.
