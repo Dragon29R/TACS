@@ -1,0 +1,127 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "AppCustomization",
+        "id": "TcWZxum9L+T|Yvp4ut@Z",
+        "x": 370,
+        "y": -10,
+        "fields": {
+          "name": "Teste123"
+        },
+        "inputs": {
+          "ITEMCONFIG": {
+            "block": {
+              "type": "ItemConfig",
+              "id": "q7r@}fY@5.3Z,Lef~~h(",
+              "fields": {
+                "enableBiddingTimer": "True",
+                "enableBuyNowPrice": "False",
+                "maxItemPhotos": "5",
+                "enableItemLocation": "True",
+                "minItemPhotos": "",
+                "enableItemCategories": ""
+              },
+              "inputs": {
+                "ITEMEXCHANGE": {
+                  "block": {
+                    "type": "ItemExchange",
+                    "id": "^du5L$j4*:.PU^zxR{eZ",
+                    "fields": {
+                      "name": "Auction"
+                    },
+                    "next": {
+                      "block": {
+                        "type": "ItemExchange",
+                        "id": "q/gKHNAAlae-Azx$S7tY",
+                        "fields": {
+                          "name": "Free"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "FEATURES": {
+            "block": {
+              "type": "Features",
+              "id": "l9J/q.3?IE=]L|qP2p1X",
+              "fields": {
+                "enableChat": "True",
+                "enableRatings": "True",
+                "enableNotifications": "True",
+                "moderationMode": "None",
+                "authMode": "None",
+                "enableAnalytics": "True"
+              }
+            }
+          },
+          "COMMUNITY": {
+            "block": {
+              "type": "Community",
+              "id": "l#K)2(DBc,OX=?aG/`Jm",
+              "fields": {
+                "name": "Example community",
+                "color": "#0000ff",
+                "logo": "https://picsum.photos/200/300",
+                "maxUsers": "10",
+                "allowSubcommunities": "False",
+                "rules": "No disrespect allowed.",
+                "defaultLanguage": "en"
+              },
+              "inputs": {
+                "DOMAIN": {
+                  "block": {
+                    "type": "Domain",
+                    "id": "$)a(woui]sE~{4gSe}jR",
+                    "fields": {
+                      "name": "Feup"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "THEMECONFIG": {
+            "block": {
+              "type": "ThemeConfig",
+              "id": "(eDz:XuhE7Yp:$2n/c^s",
+              "fields": {
+                "colorScheme": "Light",
+                "fontFamily": "Arial",
+                "logoPath": "https://picsum.photos/200/300",
+                "backgroundImage": "https://picsum.photos/200/300"
+              }
+            }
+          },
+          "USER_FIELDS_LIST": {
+            "block": {
+              "type": "User_fields_list",
+              "id": "XDWOBF!YB5;|a{La3.n(",
+              "fields": {
+                "full_name": "True",
+                "address": "True",
+                "age": "True",
+                "nickname": "True",
+                "requireEmailVerification": ""
+              }
+            }
+          },
+          "COMMUNITY_FIELDS": {
+            "block": {
+              "type": "Community_fields",
+              "id": "LZ+8Y@`Sc#iVLVL*Gj@m",
+              "fields": {
+                "locale": "True",
+                "description": "True"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
