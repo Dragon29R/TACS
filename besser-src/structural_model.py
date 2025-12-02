@@ -321,7 +321,7 @@ from besser.BUML.metamodel.structural.structural import Metadata
 
 metadata = Metadata(description="TACS project")
 project = Project(
-    name="structural-model",
+    name="structural_model",
     models=[domain_model],
     owner="User",
     metadata=metadata
