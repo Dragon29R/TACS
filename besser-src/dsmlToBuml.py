@@ -1,5 +1,5 @@
 import json
-from structural_model import domain_model as structural_metamodel
+from structural_model import User_reputationScore, domain_model as structural_metamodel
 from besser.BUML.metamodel.structural import (
     Class, Property, Method, Parameter,
     BinaryAssociation, Generalization, DomainModel,
@@ -19,32 +19,37 @@ def extract_app_block(data):
     
     return app_custom_block
 
-def build_item_config(app_block, domain_model):
+def build_item_config(app_block, domain_model: DomainModel):
     pass
-def build_features(app_block, domain_model):
+def build_features(app_block, domain_model: DomainModel):
     rules = app_block['inputs']['FEATURES']['block']['fields']
-    print(rules['enableChat'])
-    if rules['enableChat']:
+    if rules['enableChat'] == "True":
         domain_model.add_type(structural_metamodel.get_class_by_name("ChatThread"))
-    if rules['enableRatings']:
+        domain_model.add_type(structural_metamodel.get_class_by_name("Message"))
+    if rules['enableRatings'] == "True":
         domain_model.add_type(structural_metamodel.get_class_by_name("Review"))
-    if rules['enableNotifications']:
-        pass
+        domain_model.get_class_by_name("User").add_attribute(User_reputationScore)
     if rules['moderationMode'] == "ReportOnly":
         domain_model.add_type(structural_metamodel.get_class_by_name("Report"))
-        pass
     if rules['enableAnalytics']:
         pass
-    
+    if rules['enableNotifications']:
+        pass
+    if rules['authMode']:
+        pass
+
+def build_community(app_block, domain_model: DomainModel):
     pass
-def build_community(app_block, domain_model):
+def build_community_fields(app_block, domain_model: DomainModel):
     pass
-def build_community_fields(app_block, domain_model):
+def build_theme_config(app_block, domain_model: DomainModel):
     pass
-def build_theme_config(app_block, domain_model):
-    pass
-def build_user(app_block, domain_model):
-    pass
+def build_user(app_block, domain_model: DomainModel):
+    attributes_set: set[Property] = structural_metamodel.get_class_by_name("User").all_attributes()
+    attributes_set.remove(User_reputationScore)
+    methods_set: set[Method] = structural_metamodel.get_class_by_name("User").methods
+    User = Class(name="User", attributes= attributes_set, methods= methods_set)
+    domain_model.add_type(User)
 
 if __name__ == "__main__":
     with open('DSML_model.json', 'r') as f:
@@ -52,14 +57,14 @@ if __name__ == "__main__":
         
     app_block = extract_app_block(config)
 
-    new_domain_model = DomainModel(name=app_block.get('fields').get('name', ""))
+    new_domain_model:DomainModel = DomainModel(name=app_block.get('fields').get('name', ""))
     
     #default classes
-    new_domain_model.add_type(structural_metamodel.get_class_by_name("User"))
+    build_user(app_block, new_domain_model)
     new_domain_model.add_type(structural_metamodel.get_class_by_name("Community"))
     new_domain_model.add_type(structural_metamodel.get_class_by_name("Item"))
     new_domain_model.add_type(structural_metamodel.get_class_by_name("PhotoUrl"))
-    new_domain_model.add_type(structural_metamodel.get_class_by_name("Role"))
+    new_domain_model.add_type(structural_metamodel.get_class_by_name("Membership"))
     
     
     # Use api to parse DSML 
@@ -69,5 +74,7 @@ if __name__ == "__main__":
     build_community(app_block,new_domain_model)
     build_community_fields(app_block,new_domain_model)
     build_theme_config(app_block,new_domain_model)
-    build_user(app_block,new_domain_model)
     
+#    for cls in new_domain_model.get_classes():
+#        if cls.name == "User":
+#            print(cls.attributes)

@@ -51,7 +51,7 @@
               "id": "l9J/q.3?IE=]L|qP2p1X",
               "fields": {
                 "enableChat": "True",
-                "enableRatings": "True",
+                "enableRatings": "False",
                 "enableNotifications": "True",
                 "moderationMode": "None",
                 "authMode": "None",
