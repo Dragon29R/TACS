@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .image-gallery {
+            width: 100%;
+            height: 400px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+        .details-section {
+            margin-bottom: 20px;
+        }
+        .title-label {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .price-label {
+            font-size: 20px;
+            color: #007bff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .bidding-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .bid-button {
+            background-color: #28a745;
+            color: white;
+        }
+        .bid-button:hover {
+            background-color: #218838;
+        }
+        .buy-now-button {
+            background-color: #dc3545;
+            color: white;
+        }
+        .buy-now-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-gallery" id="imageGallery">
+            <span>Image Gallery</span>
+        </div>
+        
+        <div class="details-section">
+            <div class="title-label" id="titleLabel">{{ item_title | default('Item Title') }}</div>
+            <div class="price-label" id="priceLabel">{{ item_price | default('$0.00') }}</div>
+        </div>
+        
+        <div class="bidding-section">
+            <div class="form-group">
+                <label for="bidInput">Enter your bid:</label>
+                <input type="number" id="bidInput" name="bidInput" placeholder="Enter bid amount" step="0.01">
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="bid-button" id="bidButton">Place Bid</button>
+                {% if enable_buy_now %}
+                <button type="submit" class="buy-now-button" id="buyNowButton">Buy Now</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
