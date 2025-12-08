@@ -163,14 +163,11 @@ def add_generalizations_for_class(class_name, domain_model: DomainModel, new_dom
                 if gen not in new_domain_model.generalizations:
                     new_domain_model.generalizations.add(gen)
 
-if __name__ == "__main__":
-    with open('DSML_model.json', 'r') as f:
+def create_domain_model_from_dsml(dsml_path: str) -> DomainModel:
+    with open(dsml_path, 'r') as f:
         config = json.load(f)
-        
     app_block = extract_app_block(config)
-
-    new_domain_model:DomainModel = DomainModel(name=app_block.get('fields').get('name', ""))
-    
+    new_domain_model = DomainModel(name=app_block.get('fields').get('name', ""))
     #default classes
     build_user(app_block, new_domain_model)
     new_domain_model.add_type(structural_metamodel.get_class_by_name("Community"))
@@ -191,7 +188,11 @@ if __name__ == "__main__":
     build_community(app_block,new_domain_model)
     build_community_fields(app_block,new_domain_model)
     build_theme_config(app_block,new_domain_model)
-    
+    return new_domain_model
+
+if __name__ == "__main__":
+    dsml_path = 'DSML_model.json'
+    new_domain_model = create_domain_model_from_dsml(dsml_path)
     print(f"Domain Model: {new_domain_model.name}")
     print(f"\nClasses ({len(new_domain_model.get_classes())}):")
     for cls in new_domain_model.get_classes():
