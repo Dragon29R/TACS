@@ -1,5 +1,5 @@
 import json
-from structural_model import Community_description, Community_locale, User_avatarUrl, User_description, User_displayName, User_email, User_fullName, User_id, User_reputationScore, domain_model as structural_metamodel
+from structural_model import Community_description, Community_locale, User_address, User_age, User_avatarUrl, User_description, User_displayName, User_email, User_fullName, User_id, User_nickname, User_reputationScore, domain_model as structural_metamodel
 from besser.BUML.metamodel.structural import (
     Class, Property, Method, Parameter,
     BinaryAssociation, Generalization, DomainModel,
@@ -70,7 +70,7 @@ def build_item_config(app_block, domain_model: DomainModel):
         domain_model.add_type(category_class)
         add_associations_for_class("Category", structural_metamodel, domain_model)
         
-    # TODO: other item config are not in the structural model
+    # Remaining do not cause structural model changes
     
 def build_features(app_block, domain_model: DomainModel):
     rules = app_block['inputs']['FEATURES']['block']['fields']
@@ -89,7 +89,7 @@ def build_features(app_block, domain_model: DomainModel):
         domain_model.add_type(structural_metamodel.get_class_by_name("Report"))
         add_associations_for_class("Report", structural_metamodel, domain_model)
     
-    # TODO: These are not defined in the structural model
+    # These will not be implemented
     if rules['enableAnalytics']:
         pass
     if rules['enableNotifications']:
@@ -98,8 +98,10 @@ def build_features(app_block, domain_model: DomainModel):
         pass
 
 def build_community(app_block, domain_model: DomainModel):
-    # TODO: community struct model vs dsml are mismatched
+    # All community attributes are mandatory in structural model
+    # Remaining configs are for UI
     pass
+
 def build_community_fields(app_block, domain_model: DomainModel):
     community_fields = app_block['inputs']['COMMUNITY_FIELDS']['block']['fields']
     community_class = domain_model.get_class_by_name("Community")
@@ -115,7 +117,7 @@ def build_community_fields(app_block, domain_model: DomainModel):
         community_class.attributes = current_attrs
 
 def build_theme_config(app_block, domain_model: DomainModel):
-    # TODO: Not reflected in structural model
+    # Part of community UI not structural model
     pass
 def build_user(app_block, domain_model: DomainModel):
     user_fields = app_block['inputs']['USER_FIELDS_LIST']['block']['fields']
@@ -124,7 +126,9 @@ def build_user(app_block, domain_model: DomainModel):
 
     optional_fields = {
         "full_name": User_fullName,
-        # TODO: nickname address and age are not in the structural model
+        "nickname": User_nickname,
+        "address": User_address,
+        "age": User_age,
 
     }
     for key, prop in optional_fields.items():
