@@ -1,5 +1,10 @@
 import json
-from structural_model import Community_description, Community_locale, User_address, User_age, User_avatarUrl, User_description, User_displayName, User_email, User_fullName, User_id, User_nickname, User_reputationScore, domain_model as structural_metamodel
+from structural_model import (
+    Community_description, Community_locale, User_address, User_age, User_avatarUrl, 
+    User_description, User_displayName, User_email, User_fullName, User_id, User_nickname, 
+    User_reputationScore,
+    domain_model as structural_metamodel
+)
 from besser.BUML.metamodel.structural import (
     Class, Property, Method, Parameter,
     BinaryAssociation, Generalization, DomainModel,
@@ -41,23 +46,28 @@ def build_item_config(app_block, domain_model: DomainModel):
         needs_transaction = True
         add_associations_for_class("Auction", structural_metamodel, domain_model)
         add_associations_for_class("Bid", structural_metamodel, domain_model)
+        add_constraints_for_class("Auction", structural_metamodel, domain_model)
+        add_constraints_for_class("Bid", structural_metamodel, domain_model)
     
     if "BuyNow" in exchange_types or "Free" in exchange_types:
         sale_class = structural_metamodel.get_class_by_name("Sale")
         domain_model.add_type(sale_class)
         needs_transaction = True
         add_associations_for_class("Sale", structural_metamodel, domain_model)
+        add_constraints_for_class("Sale", structural_metamodel, domain_model)
     
     if "Exchange" in exchange_types:
         exchange_class = structural_metamodel.get_class_by_name("Exchange")
         domain_model.add_type(exchange_class)
         needs_transaction = True
         add_associations_for_class("Exchange", structural_metamodel, domain_model)
+        add_constraints_for_class("Exchange", structural_metamodel, domain_model)
     
     if needs_transaction:
         transaction_class = structural_metamodel.get_class_by_name("Transaction")
         domain_model.add_type(transaction_class)
         add_associations_for_class("Transaction", structural_metamodel, domain_model)
+        add_constraints_for_class("Transaction", structural_metamodel, domain_model)
         
         # Add generalizations
         add_generalizations_for_class("Sale", structural_metamodel, domain_model)
@@ -79,15 +89,19 @@ def build_features(app_block, domain_model: DomainModel):
         domain_model.add_type(structural_metamodel.get_class_by_name("Message"))
         add_associations_for_class("ChatThread", structural_metamodel, domain_model)
         add_associations_for_class("Message", structural_metamodel, domain_model)
+        add_constraints_for_class("ChatThread", structural_metamodel, domain_model)
+        add_constraints_for_class("Message", structural_metamodel, domain_model)
         
     if rules['enableRatings'] == "True":
         domain_model.add_type(structural_metamodel.get_class_by_name("Review"))
         domain_model.get_class_by_name("User").add_attribute(User_reputationScore)
         add_associations_for_class("Review", structural_metamodel, domain_model)
+        add_constraints_for_class("Review", structural_metamodel, domain_model)
 
     if rules['moderationMode'] == "ReportOnly":
         domain_model.add_type(structural_metamodel.get_class_by_name("Report"))
         add_associations_for_class("Report", structural_metamodel, domain_model)
+        add_constraints_for_class("Report", structural_metamodel, domain_model)
     
     # These will not be implemented
     if rules['enableAnalytics']:
@@ -129,7 +143,6 @@ def build_user(app_block, domain_model: DomainModel):
         "nickname": User_nickname,
         "address": User_address,
         "age": User_age,
-
     }
     for key, prop in optional_fields.items():
         if user_fields.get(key) == "True":
@@ -138,6 +151,7 @@ def build_user(app_block, domain_model: DomainModel):
 
     User.attributes = {attr for attr in User.attributes if attr in base_attributes}
     domain_model.add_type(User)
+    add_constraints_for_class("User", structural_metamodel, domain_model)
 
 def add_associations_for_class(class_name, domain_model: DomainModel, new_domain_model: DomainModel):
     for assoc in domain_model.associations:
@@ -167,6 +181,15 @@ def add_generalizations_for_class(class_name, domain_model: DomainModel, new_dom
                 if gen not in new_domain_model.generalizations:
                     new_domain_model.generalizations.add(gen)
 
+def add_constraints_for_class(class_name, domain_model: DomainModel, new_domain_model: DomainModel):
+    """Add all OCL constraints that have the given class as their context"""
+    for constraint in domain_model.constraints:
+        if constraint.context and constraint.context.name == class_name:
+            # Check if the context class is in the new model
+            if new_domain_model.get_class_by_name(class_name) is not None:
+                if constraint not in new_domain_model.constraints:
+                    new_domain_model.constraints.add(constraint)
+
 def create_domain_model_from_dsml(dsml_path: str) -> DomainModel:
     with open(dsml_path, 'r') as f:
         config = json.load(f)
@@ -184,6 +207,10 @@ def create_domain_model_from_dsml(dsml_path: str) -> DomainModel:
     add_associations_for_class("Item", structural_metamodel, new_domain_model)
     add_associations_for_class("PhotoUrl", structural_metamodel, new_domain_model)
     add_associations_for_class("Membership", structural_metamodel, new_domain_model)
+    
+    add_constraints_for_class("Community", structural_metamodel, new_domain_model)
+    add_constraints_for_class("Item", structural_metamodel, new_domain_model)
+    add_constraints_for_class("Membership", structural_metamodel, new_domain_model)
     
     # Use api to parse DSML 
     # https://besser.readthedocs.io/en/latest/api/BUML/metamodel/api_structural.html
@@ -209,6 +236,10 @@ if __name__ == "__main__":
     print(f"\nGeneralizations ({len(new_domain_model.generalizations)}):")
     for gen in new_domain_model.generalizations:
         print(f"  - {gen.specific.name} -> {gen.general.name}")
+    
+    print(f"\nConstraints ({len(new_domain_model.constraints)}):")
+    for constraint in new_domain_model.constraints:
+        print(f"  - {constraint.name} (context: {constraint.context.name if constraint.context else 'None'})")
     
     print(f"\nUser attributes:")
     user = new_domain_model.get_class_by_name("User")
