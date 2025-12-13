@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste123</title>
+    <style>
+        :root {
+            /* Theme Config */
+            --font-family: "Arial", sans-serif;
+            --primary-color: #0000ff;
+            --bg-image: url("https://picsum.photos/200/300");
+            --text-color: #333;
+            --bg-color: #fff;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Basic Menu Styling */
+        .main-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: var(--primary-color);
+        }
+
+        .main-nav li {
+            float: left;
+        }
+
+        .main-nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .main-nav li a:hover {
+            background-color: rgba(0,0,0,0.2);
+        }
+        
+        .main-nav .logout {
+            float: right;
+            background-color: #d9534f;
+        }
+
+        .screen-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    
+    
+
+    <header>
+        
+<nav class="main-nav">
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        
+        
+        
+        <li><a href="auction.html">Auctions</a></li>
+        
+
+        <li><a href="create_listing.html">Sell</a></li>
+
+        
+        
+        <li><a href="chat.html">Chat</a></li>
+        
+
+        <li><a href="profile.html">Profile</a></li>
+        
+        
+        <li><a href="login.html" class="logout">Logout</a></li>
+    </ul>
+</nav>
+
+    </header>
+
+    <div class="screen-container">
+        
+
+    <div id="ChatScreen">
+        <h2>Messages</h2>
+        
+        <div id="MESSAGELIST" style="height: 300px; overflow-y: scroll; border: 1px solid #eee;">
+            </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="INPUTFIELD" placeholder="Type a message..." />
+            <button id="SENDBUTTON">Send</button>
+        </div>
+    </div>
+
+
+    </div>
+
+</body>
+</html>

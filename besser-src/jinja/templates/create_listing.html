@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="CreateListeningScreen">
+    <h2>Sell an Item</h2>
+    
+    <form>
+        <input type="text" id="TITLEFIELD" placeholder="Item Title" required />
+        <textarea id="DESCRIPTIONFIELD" placeholder="Description"></textarea>
+        
+        <input type="number" id="PRICEFIELD" placeholder="Price / Starting Bid" />
+        
+        <label>Upload Images (Max {{ dsml.blocks.blocks[0].inputs.ITEMCONFIG.block.fields.maxItemPhotos }})</label>
+        <input type="file" id="IMAGEUPLOAD" multiple />
+
+        {% if dsml.blocks.blocks[0].inputs.ITEMCONFIG.block.fields.enableItemLocation == 'True' %}
+        <input type="text" id="LOCATIONFIELD" placeholder="Item Location" />
+        {% endif %}
+
+        <button type="submit" id="SUBMITBUTTON">Publish Listing</button>
+    </form>
+</div>
+{% endblock %}

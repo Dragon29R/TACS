@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{# Set Language from Community settings #}
+<html lang="{{ dsml.blocks.blocks[0].inputs.COMMUNITY.block.fields.defaultLanguage }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ dsml.blocks.blocks[0].fields.name }}</title>
+    <style>
+        :root {
+            /* Theme Config */
+            --font-family: "{{ dsml.blocks.blocks[0].inputs.THEMECONFIG.block.fields.fontFamily }}", sans-serif;
+            --primary-color: {{ dsml.blocks.blocks[0].inputs.COMMUNITY.block.fields.color }};
+            --bg-image: url("{{ dsml.blocks.blocks[0].inputs.THEMECONFIG.block.fields.backgroundImage }}");
+            --text-color: {% if dsml.blocks.blocks[0].inputs.THEMECONFIG.block.fields.colorScheme == 'Light' %}#333{% else %}#fff{% endif %};
+            --bg-color: {% if dsml.blocks.blocks[0].inputs.THEMECONFIG.block.fields.colorScheme == 'Light' %}#fff{% else %}#333{% endif %};
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Basic Menu Styling */
+        .main-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: var(--primary-color);
+        }
+
+        .main-nav li {
+            float: left;
+        }
+
+        .main-nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .main-nav li a:hover {
+            background-color: rgba(0,0,0,0.2);
+        }
+        
+        .main-nav .logout {
+            float: right;
+            background-color: #d9534f;
+        }
+
+        .screen-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    
+    {% from 'menus.html' import main_navigation %}
+
+    <header>
+        {{ main_navigation(dsml) }}
+    </header>
+
+    <div class="screen-container">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
