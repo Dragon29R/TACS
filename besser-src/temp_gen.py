@@ -33,7 +33,7 @@ def generate_html_from_gui(gui_file='gui_model.json'):
     # Path: blocks -> block[0] -> inputs -> MODULE -> block -> inputs
     try:
         main_block = data['blocks']['blocks'][0]
-        module_block = main_block['inputs']['MODULE']['block']
+        module_block = main_block['inputs']['MODULE (MODULE)']['block']
         screens = module_block['inputs']
     except KeyError as e:
         print(f"Error parsing JSON structure: {e}")
@@ -48,10 +48,12 @@ def generate_html_from_gui(gui_file='gui_model.json'):
         
         screen_block = screen_data['block']
         screen_name, _ = get_block_type_and_class(screen_block['type'])
+        print(screen_name)
         screen_id = screen_block['id']
         
         # Create filename (e.g., ListingDetailsScreen -> listing_details_screen.html)
         file_name = re.sub(r'(?<!^)(?=[A-Z])', '_', screen_name).lower() + ".html"
+        file_name = file_name.replace('_screen', '')  # Clean double underscores if any
         
         print(f"Generating {file_name} from {screen_name}...")
 

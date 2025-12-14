@@ -3,13 +3,14 @@
 {% block content %}
 <div id="HomeScreen">
     <header>
-        <h2>Welcome to {{ dsml.blocks.blocks[0].inputs.COMMUNITY.block.fields.name }}</h2>
+        <h2>Welcome to <span id="HEADER_TITLE">Loading...</span></h2>
     </header>
 
     <nav id="MENU">
         <ul>
             <li><a href="auction.html">Auctions</a></li>
             <li><a href="create_listing.html">Sell Item</a></li>
+            
             {% if dsml.blocks.blocks[0].inputs.FEATURES.block.fields.enableChat == 'True' %}
             <li><a href="chat.html">Chat</a></li>
             {% endif %}

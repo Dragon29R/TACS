@@ -29,9 +29,15 @@ def generate_all_pages():
 
     # 4. Loop and Render
     for page_name in pages:
+        
+        screen_context = {
+            'name': page_name.replace('_', ' ').replace('.html', '').title(),  
+        }
+
         try:
             template = env.get_template(f"{page_name}")
-            output = template.render(dsml=dsml_data)
+
+            output = template.render(dsml=dsml_data, screen=screen_context)
             
             # Save output (e.g., render login.html -> output_login.html)
             output_filename = f"../out/{page_name}"
