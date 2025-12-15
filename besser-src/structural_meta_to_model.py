@@ -1,5 +1,5 @@
 import json
-from structural_model import (
+from structural_metamodel import (
     Community_description, Community_locale, User_address, User_age, User_avatarUrl, 
     User_description, User_displayName, User_email, User_fullName, User_id, User_nickname, 
     User_reputationScore,
