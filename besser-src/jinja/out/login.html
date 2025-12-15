@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Login | [APP_NAME_PLACEHOLDER]</title>
+    
+    <style>
+        /* Default variables (will be overridden by JS) */
+        /* Default variables (will be overridden by JS) */
+        :root {
+            --primary-color: #ffffff; /* Fallback */
+            --font-family: sans-serif;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            
+            /* Background Image Defaults: These will be set by JS */
+            background-image: none; 
+            background-size: cover; /* Ensures image covers the whole body */
+            background-attachment: fixed; /* Keeps image still during scroll */
+            background-position: center; 
+        }
+        
+        /* Loading state to prevent "Flash of Unstyled Content" */
+        body.loading { opacity: 0; }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Basic Menu Styling */
+        .main-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: var(--primary-color);
+            height: 50px; /* NEW: Set a defined height for the bar */
+        }
+
+        .main-nav li {
+            float: left;
+        }
+
+        .main-nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .main-nav li a:hover {
+            background-color: rgba(0,0,0,0.2);
+        }
+        
+        /* Update the Logout li class name */
+       .main-nav .logout-link {
+        float: right;
+        background-color: #d9534f;
+    }
+
+         /* NEW: Basic style for the logo image */
+        .main-nav .app-logo img {
+            height: 100%; /* Make the image take 100% of the parent <a> height */
+            width: auto; /* Maintain aspect ratio */
+            vertical-align: middle;
+            /* margin-top: -5px; <--- REMOVED THIS LINE */
+        }
+        
+        /* Your existing .app-logo and .logout-link styles here */
+        .main-nav .app-logo {
+            float: right;
+            /* Set the padding/height of the list item container */
+            height: 100%; 
+            padding: 0 16px; 
+        }
+        
+        .main-nav .app-logo a {
+            /* Adjusted padding to distribute space */
+            padding: 5px 0; 
+            display: block;
+            height: calc(100% - 10px); /* Height of the link content area */
+        }
+
+        /* Revert the default float left for regular items */
+        .main-nav li {
+            float: left;
+            /* Ensure all list items share the bar height */
+            height: 100%;
+        }
+
+        .screen-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+        }
+        body.loading { opacity: 0; }
+        .screen-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            /* CRITICAL: Set background to a semi-transparent white/black 
+               so the body background image can show through */
+            background: rgba(255,255,255,0.9); 
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="loading">
+    
+    
+
+    <header>
+        
+<nav class="main-nav">
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        
+        
+        
+        <li><a href="auction.html">Auctions</a></li>
+        
+
+        <li><a href="create_listing.html">Sell</a></li>
+
+        
+        
+        <li><a href="chat.html">Chat</a></li>
+        
+
+        <li><a href="profile.html">Profile</a></li>
+        
+        
+        <li class="logout-link"><a href="login.html" class="logout">Logout</a></li>
+        
+        
+        <li class="app-logo">
+            <a href="home.html">
+                <img id="APP_LOGO_IMAGE" src="" alt="Application Logo Placeholder" />
+            </a>
+        </li>
+    </ul>
+</nav>
+
+    </header>
+
+    <div class="app-container">
+        
+<div id="LoginScreen">
+    <h1>Login</h1>
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="USERNAMEFIELD" placeholder="Enter username" />
+    </div>
+    
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="PASSWORDFIELD" placeholder="Enter password" />
+    </div>
+
+    
+        <p>Guest access enabled (AuthMode is None).</p>
+        <button id="LOGINBUTTON">Enter as Guest</button>
+    
+</div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const APP_NAME_PLACEHOLDER = '[APP_NAME_PLACEHOLDER]';
+            const body = document.body;
+            
+            // 1. Fetch the small configuration file
+            fetch('JSON/app_config.json')
+                .then(response => response.json())
+                .then(config => {
+                    
+                    // --- NEW: UPDATE TAB TITLE ---
+                    // This sets the tab to "AppName - ScreenName"
+                    if (config.text && config.text.appName) {
+                        document.title = document.title.replace(APP_NAME_PLACEHOLDER, config.text.appName);
+                    } else {
+                        // If no app name exists, just remove the placeholder
+                        document.title = document.title.replace(APP_NAME_PLACEHOLDER, 'App');
+                    }
+
+                    // 2. Apply Theme (CSS Variables)
+                    const root = document.documentElement;
+                    console.log(config);
+                    root.style.setProperty('--primary-color', config.theme.primaryColor);
+                    root.style.setProperty('--font-family', config.theme.fontFamily);
+                    
+                    if (config.theme.colorScheme === 'Dark') {
+                        root.style.setProperty('--bg-color', '#333333');
+                        root.style.setProperty('--text-color', '#ffffff');
+                    } else {
+                    // Added else case to ensure colors are set correctly for Light mode (as per previous guidance)
+                    root.style.setProperty('--bg-color', '#f4f4f4');
+                    root.style.setProperty('--text-color', '#333333');
+                }
+
+                    // 3. Apply Text Content (DOM Manipulation)
+                    // Example: Update the page title or header if elements exist
+                    const headerTitle = document.getElementById('HEADER_TITLE');
+                    if (headerTitle) headerTitle.textContent = config.text.communityName;
+
+
+                    const logoImage = document.getElementById('APP_LOGO_IMAGE');
+                    if (logoImage && config.theme.logoUrl) {
+                        logoImage.src = config.theme.logoUrl;
+                        logoImage.alt = config.text.appName + " Logo";
+                    }
+
+                    if (config.theme.backgroundImage) {
+                        body.style.backgroundImage = `url('${config.theme.backgroundImage}')`;
+                    }
+                
+                    const fileInputs = document.querySelectorAll('input[type="file"]');
+                    fileInputs.forEach(input => {
+                        // Logic handled here instead of Jinja
+                        if (config.constraints.maxPhotos) {
+                            input.setAttribute('data-max', config.constraints.maxPhotos);
+                        }
+                    });
+
+                    // 5. Reveal the page
+                    document.body.classList.remove('loading');
+                })
+                .catch(err => console.error('Error loading config:', err));
+        });
+    </script>
+</body>
+</html>

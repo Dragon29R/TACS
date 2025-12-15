@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="LoginScreen">
+    <h1>Login</h1>
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="USERNAMEFIELD" placeholder="Enter username" />
+    </div>
+    
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="PASSWORDFIELD" placeholder="Enter password" />
+    </div>
+
+    {% if dsml.blocks.blocks[0].inputs.FEATURES.block.fields.authMode != 'None' %}
+        <button id="LOGINBUTTON" style="background-color: var(--primary-color);">Login</button>
+    {% else %}
+        <p>Guest access enabled (AuthMode is None).</p>
+        <button id="LOGINBUTTON">Enter as Guest</button>
+    {% endif %}
+</div>
+{% endblock %}

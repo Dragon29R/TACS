@@ -1,0 +1,37 @@
+{% extends "base.html.jinja2" %}
+
+{% block content %}
+    {% set item_class = structural_model.get_class('Item') %}
+
+    {% for component in screen.components %}
+        
+        {# 1. Check if the GUI component is a form related to the Item class #}
+        {% if component.name == 'ItemForm' %}
+            
+            <h2>Create New Item Listing</h2>
+            
+            {% for attribute in item_class.attributes %}
+                
+                {# 2. Use DSML to filter required fields (e.g., skip location if disabled) #}
+                {% if attribute.name == 'location' and dsml.blocks[0].inputs.ITEMCONFIG.block.fields.enableItemLocation == 'False' %}
+                    {# SKIP THIS ATTRIBUTE #}
+                {% else %}
+                
+                    <div class="form-group">
+                        <label>{{ attribute.name | capitalize }}</label>
+                        
+                        {# 3. Use Structural Model type to set HTML input type #}
+                        {% if attribute.type.name == 'Integer' %}
+                            <input type="number" name="{{ attribute.name }}" />
+                        {% elif attribute.type.name == 'String' %}
+                            <input type="text" name="{{ attribute.name }}" />
+                        {% endif %}
+                    </div>
+                
+                {% endif %}
+            {% endfor %}
+            
+        {% endif %}
+
+    {% endfor %}
+{% endblock %}

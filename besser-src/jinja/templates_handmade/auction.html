@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="AuctionScreen">
+    <h2>Current Listings</h2>
+    
+    <div id="FILTERMENU">
+        <select>
+            <option>Sort by Price</option>
+            <option>Sort by Date</option>
+        </select>
+    </div>
+
+    <div id="AUCTIONLIST">
+        <div class="auction-item">
+            <p>Item Example</p>
+            <button id="ENTERAUCTIONBUTTON" onclick="location.href='listing_details.html'">View Details</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
