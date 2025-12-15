@@ -1,5 +1,5 @@
 import json
-from gui_metamodel import domain_model as gui_metamodel
+from metamodels.gui_metamodel import domain_model as gui_metamodel
 from besser.BUML.metamodel.structural import (
     Class, Property, Method, Parameter,
     BinaryAssociation, Generalization, DomainModel,
