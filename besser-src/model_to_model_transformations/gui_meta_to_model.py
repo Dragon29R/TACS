@@ -202,32 +202,53 @@ def create_gui_model_from_dsml(dsml_path: str) -> DomainModel:
 if __name__ == "__main__":
     dsml_path = 'DSML_model.json'
     gui_model = create_gui_model_from_dsml(dsml_path)
-    
-    print(f"GUI Model: {gui_model.name}")
-    print(f"\nClasses ({len(gui_model.get_classes())}):")
-    for cls in sorted(gui_model.get_classes(), key=lambda c: c.name):
-        print(f"  - {cls.name}")
-    
-    print(f"\nAssociations ({len(gui_model.associations)}):")
-    for assoc in sorted(gui_model.associations, key=lambda a: a.name):
-        print(f"  - {assoc.name}")
-    
+    print(f"GUI Model: {gui_model.name}\n")
     # Group classes by type
+    all_classes = {c.name: c for c in gui_model.get_classes()}
     screens = [c for c in gui_model.get_classes() if c.name.endswith("Screen")]
     components = [c for c in gui_model.get_classes() if c.name.endswith("Component")]
     fields = [c for c in gui_model.get_classes() if c.name.endswith("Field")]
     buttons = [c for c in gui_model.get_classes() if c.name.endswith("Button")]
-    others = [c for c in gui_model.get_classes() 
-              if not any(c.name.endswith(suffix) for suffix in ["Screen", "Component", "Field", "Button"])]
-    
-    print(f"Screens ({len(screens)}): {', '.join(sorted(c.name for c in screens))}")
-    print(f"Components ({len(components)}): {', '.join(sorted(c.name for c in components))}")
-    print(f"Fields ({len(fields)}): {', '.join(sorted(c.name for c in fields))}")
-    print(f"Buttons ({len(buttons)}): {', '.join(sorted(c.name for c in buttons))}")
-    if others:
-        print(f"Others ({len(others)}): {', '.join(sorted(c.name for c in others))}")
-    
-    # validation
+    others = [c for c in gui_model.get_classes() if not any(c.name.endswith(suffix) for suffix in ["Screen", "Component", "Field", "Button"])]
+
+    def get_type_label(name):
+        if name.endswith("Screen"): return "Screen"
+        if name.endswith("Component"): return "Component"
+        if name.endswith("Field"): return "Field"
+        if name.endswith("Button"): return "Button"
+        return "Other"
+
+    class_dependencies = {c.name: set() for c in gui_model.get_classes()}
+    for assoc in gui_model.associations:
+        if hasattr(assoc, 'ends'):
+            ends = list(assoc.ends)
+            names = [end.type.name for end in ends]
+            for i in range(len(names)):
+                for j in range(len(names)):
+                    if i != j:
+                        class_dependencies[names[i]].add(names[j])
+
+    # Exclude CommonScreen
+    def filtered_deps(classname):
+        return [dep for dep in class_dependencies[classname] if dep != classname and dep != "CommonScreen"]
+
+    def print_dependency_tree(classname, class_dependencies, get_type_label, level=0, visited=None):
+        if visited is None:
+            visited = set()
+        indent = "  " * level
+        print(f"{indent}- {classname} [{get_type_label(classname)}]")
+        visited.add(classname)
+        for dep in sorted(filtered_deps(classname)):
+            if dep not in visited:
+                print_dependency_tree(dep, class_dependencies, get_type_label, level+1, visited.copy())
+
+    for screen in sorted(screens, key=lambda c: c.name):
+        if screen.name == "CommonScreen":
+            continue
+        print(f"Screen: {screen.name}")
+        print_dependency_tree(screen.name, class_dependencies, get_type_label, level=1)
+        print()
+
     result_dict = gui_model.validate()
     if result_dict['success']:
-        print("\nGUI model is valid.")
+        print("GUI model is valid.")
