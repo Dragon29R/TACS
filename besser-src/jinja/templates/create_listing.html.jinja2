@@ -4,13 +4,14 @@
 <div id="CreateListingScreen" class="max-w-4xl mx-auto space-y-8">
     <h2 class="text-3xl font-extrabold theme-text-main">Create New Item Listing</h2>
 
-    <form class="space-y-6">
+    <form class="space-y-6" id="createListingForm">
         
         {# --- Product Title Field --- #}
         {% if gui_model.get_class_by_name('ProductTitleField') %}
         <div id="ProductTitleField" class="form-group">
             <label class="block text-sm font-bold theme-text-muted mb-2">PRODUCT TITLE</label>
-            <input type="text" name="title" placeholder="Enter item name..." 
+            <input type="text" 
+                   name="title" placeholder="Enter item name..." 
                    class="w-full theme-bg-card border theme-border theme-text-main p-4 rounded-xl focus:ring-2 focus:outline-none" />
         </div>
         {% endif %}
@@ -24,38 +25,62 @@
         </div>
         {% endif %}
 
-        {# --- Listing Type Selector (Auction vs Sale) --- #}
+        {# --- Listing Type Selector --- #}
         {% if gui_model.get_class_by_name('ListingTypeSelector') %}
         <div id="ListingTypeSelector" class="theme-bg-card border theme-border p-6 rounded-2xl shadow-sm">
             <h3 class="font-bold text-lg mb-4 theme-text-main">Listing Type</h3>
             
             {% if gui_model.get_class_by_name('CheckboxesComponent') %}
-            <div id="CheckboxesComponent" class="flex gap-6">
+            <div id="CheckboxesComponent" class="flex gap-6 flex-wrap">
+                
+                {% if gui_model.get_class_by_name('AuctionCheckbox') %}
                 <label class="flex items-center space-x-2">
-                    <input type="checkbox" name="is_auction" class="rounded border-gray-300">
+                    <input type="checkbox" id="auctionCheckbox" name="is_auction" class="rounded border-gray-300">
                     <span class="theme-text-main">Auction</span>
                 </label>
+                {% endif %}
+
+                {% if gui_model.get_class_by_name('SaleCheckbox') %}
                 <label class="flex items-center space-x-2">
-                    <input type="checkbox" name="is_sale" class="rounded border-gray-300">
+                    <input type="checkbox" id="saleCheckbox" name="is_sale" class="rounded border-gray-300">
                     <span class="theme-text-main">Direct Sale</span>
                 </label>
+                {% endif %}
+                
+                {% if gui_model.get_class_by_name('ExchangeCheckbox') %}
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" id="exchangeCheckbox" name="is_exchange" class="rounded border-gray-300">
+                    <span class="theme-text-main">Exchange</span>
+                </label>
+                {% endif %}
             </div>
             {% endif %}
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                {% if gui_model.get_class_by_name('PriceField') %}
-                <div id="PriceField">
-                    <label class="text-xs font-bold theme-text-muted uppercase">Starting Price</label>
-                    <input type="number" name="price" step="0.01" class="w-full mt-2 theme-bg-card border theme-border p-3 rounded-xl" />
+            <div class="mt-4 border-t theme-border pt-4">
+                
+                {% if gui_model.get_class_by_name('PreferedExchangeTypeField') %}
+                <div id="PreferedExchangeTypeField" class="mb-4" style="display:none;">
+                    <label class="text-xs font-bold theme-text-muted uppercase">Preferred Exchange Item(s)</label>
+                    <input type="text" name="preferred_exchange" placeholder="e.g. Vintage Camera, Guitar..." 
+                           class="w-full mt-2 theme-bg-card border theme-border p-3 rounded-xl" />
                 </div>
                 {% endif %}
 
-                {% if gui_model.get_class_by_name('AuctionClosingTimeField') %}
-                <div id="AuctionClosingTimeField">
-                    <label class="text-xs font-bold theme-text-muted uppercase">Closing Time</label>
-                    <input type="datetime-local" name="closing_time" class="w-full mt-2 theme-bg-card border theme-border p-3 rounded-xl" />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% if gui_model.get_class_by_name('PriceField') %}
+                    <div id="PriceField" style="display:none;">
+                        <label class="text-xs font-bold theme-text-muted uppercase">Price / Starting Bid</label>
+                        <input type="number" name="price" min="0" step="0.01" class="w-full mt-2 theme-bg-card border theme-border p-3 rounded-xl" />
+                    </div>
+                    {% endif %}
+
+                    {% if gui_model.get_class_by_name('AuctionClosingTimeField') %}
+                    <div id="AuctionClosingTimeField" style="display:none;">
+                        <label class="text-xs font-bold theme-text-muted uppercase">Closing Time</label>
+                        <input type="datetime-local" name="closing_time" class="w-full mt-2 theme-bg-card border theme-border p-3 rounded-xl" />
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
         {% endif %}
@@ -64,9 +89,21 @@
         {% if gui_model.get_class_by_name('MultipleImagesUploadComponent') %}
         <div id="MultipleImagesUploadComponent" class="border-2 border-dashed theme-border p-8 rounded-2xl text-center">
             <p class="theme-text-muted">Drag and drop images here or click to upload</p>
-            <input type="file" multiple class="hidden" id="imageInput">
+            <input type="file" multiple class="hidden" id="imageInput" 
+                   data-max="{{ dsml.constraints.maxPhotos | default(5) }}"
+                   data-min="{{ dsml.constraints.minPhotos | default(0) }}">
             <button type="button" onclick="document.getElementById('imageInput').click()" 
-                    class="mt-4 px-6 py-2 bg-gray-200 rounded-lg font-bold">Select Images</button>
+                   class="mt-4 px-6 py-2 bg-gray-200 rounded-lg font-bold">Select Images</button>
+            <div id="fileList" class="mt-4 text-left space-y-2"></div>
+        </div>
+        {% elif gui_model.get_class_by_name('SingleImageUploadComponent') %}
+        <div id="SingleImageUploadComponent" class="border-2 border-dashed theme-border p-8 rounded-2xl text-center">
+            <p class="theme-text-muted">Click to upload main image</p>
+            <input type="file" class="hidden" id="singleImageInput"
+                   data-min="{{ dsml.constraints.minPhotos | default(0) }}">
+            <button type="button" onclick="document.getElementById('singleImageInput').click()" 
+                   class="mt-4 px-6 py-2 bg-gray-200 rounded-lg font-bold">Select Image</button>
+            <div id="fileList" class="mt-4 text-left space-y-2"></div>
         </div>
         {% endif %}
 
@@ -89,4 +126,130 @@
 
     </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateVisibility = () => {
+            const auctionCb = document.getElementById('auctionCheckbox');
+            const saleCb = document.getElementById('saleCheckbox');
+            const exchangeCb = document.getElementById('exchangeCheckbox');
+
+            const priceField = document.getElementById('PriceField');
+            const auctionTimeField = document.getElementById('AuctionClosingTimeField');
+            const exchangeField = document.getElementById('PreferedExchangeTypeField');
+
+            const isAuction = auctionCb ? auctionCb.checked : false;
+            const isSale = saleCb ? saleCb.checked : false;
+            const isExchange = exchangeCb ? exchangeCb.checked : false;
+
+            // Price is relevant if Auction OR Sale is selected
+            if (priceField) {
+                priceField.style.display = (isAuction || isSale) ? 'block' : 'none';
+            }
+
+            // Closing Time is relevant ONLY for Auction
+            if (auctionTimeField) {
+                auctionTimeField.style.display = isAuction ? 'block' : 'none';
+            }
+
+            // Preferred Exchange Item is relevant ONLY for Exchange
+            if (exchangeField) {
+                exchangeField.style.display = isExchange ? 'block' : 'none';
+            }
+        };
+
+        ['auctionCheckbox', 'saleCheckbox', 'exchangeCheckbox'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', updateVisibility);
+        });
+
+        updateVisibility();
+
+
+        // File Upload Logic
+        const handleFileSelect = (inputId, listId) => {
+            const input = document.getElementById(inputId);
+            const list = document.getElementById(listId);
+            
+            if (!input || !list) return;
+
+            const dataTransfer = new DataTransfer();
+
+            input.addEventListener('change', (e) => {
+                const isMultiple = input.hasAttribute('multiple');
+                const newFiles = Array.from(e.target.files);
+                
+                if (newFiles.length === 0) return;
+
+                if (isMultiple) {
+                    const maxPhotos = parseInt(input.getAttribute('data-max')) || 5;
+                    const currentTotal = dataTransfer.items.length + newFiles.length;
+
+                    if (currentTotal > maxPhotos) {
+                        alert(`Limit exceeded: You can only upload up to ${maxPhotos} images. You currently have ${dataTransfer.items.length}.`);
+                        input.files = dataTransfer.files; 
+                        return;
+                    }
+
+                    newFiles.forEach(file => dataTransfer.items.add(file));
+                    input.files = dataTransfer.files;
+                } 
+
+                list.innerHTML = '';
+                Array.from(input.files).forEach(file => {
+                    const item = document.createElement('div');
+                    item.className = 'flex items-center gap-2 text-sm theme-text-main p-2 rounded theme-bg-card border theme-border';
+                    item.innerHTML = `
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="truncate">${file.name}</span>
+                    `;
+                    list.appendChild(item);
+                });
+            });
+        };
+
+        handleFileSelect('imageInput', 'fileList');
+        handleFileSelect('singleImageInput', 'fileList');
+
+        // Form Submission Validation
+        const form = document.getElementById('createListingForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                const auctionCb = document.getElementById('auctionCheckbox');
+                const saleCb = document.getElementById('saleCheckbox');
+                const exchangeCb = document.getElementById('exchangeCheckbox');
+                
+                const checkboxes = [auctionCb, saleCb, exchangeCb].filter(cb => cb !== null);
+                
+                if (checkboxes.length > 0) {
+                    const isAnyChecked = checkboxes.some(cb => cb.checked);
+                    if (!isAnyChecked) {
+                        e.preventDefault();
+                        alert('Please select at least one listing type.');
+                        return;
+                    }
+                }
+
+                const multiInput = document.getElementById('imageInput');
+                const singleInput = document.getElementById('singleImageInput');
+                
+                const inputToCheck = multiInput || singleInput;
+
+                if (inputToCheck) {
+                    const minPhotos = parseInt(inputToCheck.getAttribute('data-min')) || 0;
+                    const fileCount = inputToCheck.files.length;
+                    
+                    if (fileCount < minPhotos) {
+                        e.preventDefault();
+                        alert(`Requirement not met: You must upload at least ${minPhotos} image(s).`);
+                    }
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}
