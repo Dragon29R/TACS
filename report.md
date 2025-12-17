@@ -54,8 +54,6 @@ At the center lies the GUIModel class, which is responsible for structuring scre
 
 We also standardized component properties using enumerations, such as ScreenType, InputFieldType, and ButtonActionType, for a consistent design vocabulary.
 
-Finally, regarding the constraints, some constraints enforce mandatory composition to ensure functional interfaces and screens, with a example being that the ChatScreen has a multiplicity constraint (1..1) with NewMessageField and SendBUtton, meaning that the screen cannot exist without the ability to input and send text. Another great example isCreateListingScreen being constrained to always include a SubmitListingButton and ProductTitleField, ensuring that users can always finalize and title their listings and preventing the generation of broken forms/screens that users cannot submit/interact with.
-
 ### Model to Model 
 
 The Model-to-Model transformation stage was designed to function as the bridge between DSML and technical requirements for code generation (B-UML). During the Model-to-Model transformation stage, we developed two distinct transformations pipelines: one for converting the DSML metamodel into Structural model, and another one for GUI model, both implemented in Python. These programs take the JSON output from the Blockly and the BESSER metamodels to generate a fully defined Domain Model.
