@@ -24,7 +24,9 @@
         {% endif %}
     </div>
 
-    <button id="EDITPROFILEBUTTON">Edit Profile</button>
-    <button id="LOGOUTBUTTON">Logout</button>
+    {% if gui_model.get_class_by_name('EditProfileButton') %}
+    <button id="EditProfileButton">Edit Profile</button>
+    {% endif %}
+
 </div>
 {% endblock %}
