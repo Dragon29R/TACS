@@ -17,7 +17,7 @@
     {% if gui_model.get_class_by_name('ImageGalleryComponent') %}
     <div id="ImageGalleryComponent" class="flex gap-3 overflow-x-auto py-2">
         {% if item.details.images %}
-            {% for img_url in item.details.images %}
+            {% for img_url in item.details.images[:dsml.constraints.maxPhotos] %}
             <div class="h-24 w-24 flex-shrink-0 rounded-xl overflow-hidden border theme-border cursor-pointer hover:opacity-80 transition theme-bg-card">
                 <img src="{{ img_url }}" class="h-full w-full object-cover" alt="Gallery Image">
             </div>
@@ -34,6 +34,17 @@
         <h1 id="ProductTitleLabel" class="text-3xl md:text-4xl font-extrabold theme-text-main">
             {{ item.details.title if item.details.title else 'Product Title' }}
         </h1>
+        {% endif %}
+
+        {% if gui_model.get_class_by_name('LocationField') %} 
+        <div class="flex items-center gap-2 theme-text-muted mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-sm font-medium">
+                {{ item.details.location if item.details.location else 'Location not listed' }}
+            </span>
+        </div>
         {% endif %}
 
         {% if gui_model.get_class_by_name('ProductDescriptionLabel') %}
@@ -92,6 +103,32 @@
                     {% endfor %}
                 </div>
             </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {# --- Exchange Block --- #}
+        {% if gui_model.get_class_by_name('ExchangeDetailsComponent') %}
+        <div id="ExchangeDetailsComponent" class="theme-bg-card border theme-border p-6 rounded-2xl shadow-sm h-fit relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-purple-500"></div>
+            
+            <h3 class="font-bold text-lg theme-text-main mb-4">Propose Exchange</h3>
+            <p class="text-sm theme-text-muted mb-4">Offer an item or service in exchange.</p>
+
+            {% if gui_model.get_class_by_name('ProposedExchangeField') %}
+            <div class="mb-5">
+                <label class="text-xs font-bold theme-text-muted uppercase tracking-wider">Your Offer</label>
+                <textarea id="ProposedExchangeField" rows="2" placeholder="Describe what you want to trade..." 
+                       class="w-full mt-2 theme-bg-card border theme-border theme-text-main p-3 rounded-xl focus:ring-2 focus:outline-none transition-shadow"
+                       style="--tw-ring-color: #a855f7;"></textarea>
+            </div>
+            {% endif %}
+
+            {% if gui_model.get_class_by_name('ExchangeNowButton') %}
+            <button id="ExchangeNowButton" class="w-full text-white font-bold py-4 rounded-xl shadow-lg transition transform active:scale-95 hover:brightness-110"
+                    style="background-color: #a855f7;">
+                Propose Trade
+            </button>
             {% endif %}
         </div>
         {% endif %}

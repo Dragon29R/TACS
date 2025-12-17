@@ -2,12 +2,20 @@
   "item1": {
     "details": {
       "title": "Vintage Leica M3 Camera",
+      "location": "Porto, Portugal",
       "description": "A classic rangefinder camera in excellent condition. Includes original 50mm lens and leather carrying case.",
       "price": 3000.00,
       "images": [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn4hghPlqKrr0HDYjrRrXEPxzpnIDS7sJqmw&s",
         "https://picsum.photos/seed/camera2/800/600",
-        "https://picsum.photos/seed/camera3/800/600"
+        "https://picsum.photos/seed/camera3/800/600",
+        "https://picsum.photos/seed/camera4/800/600",
+        "https://picsum.photos/seed/camera5/800/600",
+        "https://picsum.photos/seed/camera6/800/600",
+        "https://picsum.photos/seed/camera7/800/600",
+        "https://picsum.photos/seed/camera8/800/600",
+        "https://picsum.photos/seed/camera9/800/600",
+        "https://picsum.photos/seed/camera10/800/600"
       ]
     },
     "bids": [
