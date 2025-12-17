@@ -1,0 +1,31 @@
+{
+  "item1": {
+    "details": {
+      "title": "Vintage Leica M3 Camera",
+      "description": "A classic rangefinder camera in excellent condition. Includes original 50mm lens and leather carrying case.",
+      "price": 3000.00,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn4hghPlqKrr0HDYjrRrXEPxzpnIDS7sJqmw&s",
+        "https://picsum.photos/seed/camera2/800/600",
+        "https://picsum.photos/seed/camera3/800/600"
+      ]
+    },
+    "bids": [
+      {
+        "amount": 2500.00,
+        "username": "FilmFanatic",
+        "timestamp": "2025-12-17 10:30 AM"
+      },
+      {
+        "amount": 2550.00,
+        "username": "LensLover88",
+        "timestamp": "2025-12-17 10:45 AM"
+      },
+      {
+        "amount": 2700.00,
+        "username": "Collector_01",
+        "timestamp": "2025-12-17 11:15 AM"
+      }
+    ]
+  }
+}

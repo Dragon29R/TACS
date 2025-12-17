@@ -1,56 +1,122 @@
 {% extends "base.html.jinja2" %}
 
 {% block content %}
-<div id="ListingDetailsScreen">
-    
-    {# --- 1. Load Configuration Variables --- #}
-    {% set item_config = dsml.blocks.blocks[0].inputs.ITEMCONFIG.block.fields %}
-    {# Cite: DSML_model.json (ITEMCONFIG fields) #}
-    
-    {% set exchange_type = dsml.blocks.blocks[0].inputs.ITEMCONFIG.block.inputs.ITEMEXCHANGE.block.fields.name %}
-    {# Cite: DSML_model.json (ITEMEXCHANGE name) #}
+{# --- 1. Setup Context Variables --- #}
+{# Convert model to string for component checking #}
+{% set raw_model = gui_model | string %}
 
-    <div id="IMAGEGALLERY">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn4hghPlqKrr0HDYjrRrXEPxzpnIDS7sJqmw&s" alt="Item Image" style="width:100%;" />
+{# Create a shorthand for the specific item data based on your new structure #}
+{% set item = data.item1 %}
+
+<div id="ListingDetailsScreen" class="max-w-4xl mx-auto p-4 space-y-6">
+
+    {# --- Image Section --- #}
+    {% if "Class(MainImageComponent" in raw_model %}
+    <div id="MainImageComponent" class="bg-gray-200 rounded-lg overflow-hidden h-96 flex items-center justify-center shadow-md">
+        {# Use the first image from the 'images' list inside 'details' #}
+        <img src="{{ item.details.images[0] if item.details.images else 'https://via.placeholder.com/800' }}" 
+             alt="Item" class="h-full w-full object-cover" />
+    </div>
+    {% endif %}
+
+    {% if "Class(ImageGalleryComponent" in raw_model %}
+    <div id="ImageGalleryComponent" class="flex gap-2 overflow-x-auto py-2">
+        {% if item.details.images %}
+            {% for img_url in item.details.images %}
+            <div class="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:opacity-80 transition">
+                <img src="{{ img_url }}" class="h-full w-full object-cover" alt="Gallery Image">
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="h-20 w-20 bg-gray-300 rounded"></div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {# --- Title & Description --- #}
+    <div class="space-y-2 border-b pb-4">
+        {% if "Class(ProductTitleLabel" in raw_model %}
+        <h1 id="ProductTitleLabel" class="text-3xl font-bold text-gray-900">
+            {{ item.details.title if item.details.title else 'Product Title' }}
+        </h1>
+        {% endif %}
+
+        {% if "Class(ProductDescriptionLabel" in raw_model %}
+        <p id="ProductDescriptionLabel" class="text-gray-600 leading-relaxed">
+            {{ item.details.description if item.details.description else 'No description provided.' }}
+        </p>
+        {% endif %}
     </div>
 
-    <h1 id="TITLELABEL">Vintage Camera</h1>
-
-    {# --- 2. Conditional Price Display Logic --- #}
-    
-    {# Show 'Buy Now' Price only if enabled in ITEMCONFIG #}
-    {% if item_config.enableBuyNowPrice == 'True' %}
-        <h3 id="PRICELABEL" style="color: green;">Buy Now Price: $150.00</h3>
-    {% endif %}
-
-    {# Show 'Starting Bid' only if it is an Auction #}
-    {% if exchange_type == 'Auction' %}
-        <h3 id="STARTINGPRICELABEL" style="color: var(--primary-color);">Starting Bid: $50.00</h3>
-    {% endif %}
-
-
-    {# --- 3. Interaction Controls --- #}
-
-    {# Auction Controls #}
-    {% if exchange_type == 'Auction' %}
-        <div class="bidding-section">
-            <label>Current Bid: $55.00</label>
-            <br/>
-            <input type="number" id="BIDINPUT" placeholder="Enter amount" />
-            <button id="BIDBUTTON">Place Bid</button>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        {% if item_config.enableBiddingTimer == 'True' %}
-            <p id="timer" style="color: red;">Time Remaining: 02:00:00</p>
-        {% endif %}
-    {% endif %}
+        {# --- Auction Block --- #}
+        {% if "Class(AuctionDetailsComponent" in raw_model %}
+        <div class="space-y-4">
+            <div id="AuctionDetailsComponent" class="border p-6 rounded-xl bg-blue-50/50 border-blue-100">
+                <h3 class="font-bold text-lg text-blue-900 mb-4">Auction</h3>
+                
+                {% if "Class(BidField" in raw_model %}
+                <div class="mb-3">
+                    <label class="text-xs font-semibold text-gray-500 uppercase">Your Bid</label>
+                    <input type="number" id="BidField" placeholder="Enter amount..." 
+                           class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+                </div>
+                {% endif %}
 
-    {# Buy Now Controls #}
-    {% if item_config.enableBuyNowPrice == 'True' %}
-        <div class="buy-now-section" style="margin-top: 10px;">
-            <button id="BUYNOWBUTTON" style="background-color: green; color: white; padding: 10px;">Buy Now</button>
+                {% if "Class(BidNowButton" in raw_model %}
+                <button id="BidNowButton" class="w-full text-white font-bold py-3 rounded-lg shadow-sm hover:opacity-90 transition" 
+                        style="background-color: {{ dsml.theme.primaryColor }};">
+                    Place Bid
+                </button>
+                {% endif %}
+            </div>
+
+            {# --- Bid History List --- #}
+            {# Accessing item.bids directly #}
+            {% if item.bids %}
+            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                <div class="bg-gray-50 px-4 py-2 border-b border-gray-200">
+                    <h4 class="text-sm font-semibold text-gray-700">Bid History</h4>
+                </div>
+                <div class="divide-y divide-gray-100">
+                    {% for bid in item.bids | sort(attribute='amount', reverse=True) %}
+                    <div class="flex justify-between items-center p-3 hover:bg-gray-50">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-gray-900">{{ bid.username }}</span>
+                            <span class="text-xs text-gray-400">{{ bid.timestamp }}</span>
+                        </div>
+                        <span class="font-mono font-bold text-green-600">${{ bid.amount }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
-    {% endif %}
+        {% endif %}
+
+        {# --- Sale Block --- #}
+        {% if "Class(SaleDetailsComponent" in raw_model %}
+        <div id="SaleDetailsComponent" class="border p-6 rounded-xl bg-white shadow-sm h-fit">
+            <h3 class="font-bold text-lg text-gray-900 mb-4">Buy Now</h3>
+
+            {% if "Class(PriceLabel" in raw_model %}
+            <div class="mb-4">
+                <span class="text-sm text-gray-500">Current Price</span>
+                <div id="PriceLabel" class="text-4xl text-green-600 font-extrabold">
+                    ${{ item.details.price if item.details.price else '0.00' }}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if "Class(BuyNowButton" in raw_model %}
+            <button id="BuyNowButton" class="w-full bg-green-600 text-white font-bold py-4 rounded-lg hover:bg-green-700 transition shadow-lg shadow-green-100">
+                Buy It Now
+            </button>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
 
 </div>
 {% endblock %}
