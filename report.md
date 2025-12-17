@@ -52,11 +52,11 @@ We designed the GUI metamodel in order to provide a flexible but structured basi
 
 At the center lies the GUIModel class, which is responsible for structuring screens such as LoginScreen, HomeScreen, CreateListingScreen, ListingDetailScreen, AuctionScreen, ProfileScreen, SearchResultsScreen, and ChatScreen. Each screen represents an important function of the system, which is structured by the structural model. Screens are composed of ViewContainers and ViewComponents (such as buttons, forms, and images) in order to be modular and reusable. Specific components, such as Image, Menu, and Form, are used for specific marketplace functionality. Optional components use the “?” notation, in order to handle dynamic contexts; for example, showing a duration field only for an auction listing.
 
-We also standardized component properties using enumerations, such as ScreenType, InputFieldType, and ButtonActionType, for a consistent design vocabulary.
+Additionally, we established standardized class names throughout the metamodel, such as ScreenType, InputFieldType, and ButtonActionType, for a consistent design vocabulary and clarity in the components structure.
 
 ### Model to Model 
 
-The Model-to-Model transformation stage was designed to function as the bridge between DSML and technical requirements for code generation (B-UML). During the Model-to-Model transformation stage, we developed two distinct transformations pipelines: one for converting the DSML metamodel into Structural model, and another one for GUI model, both implemented in Python. These programs take the JSON output from the Blockly and the BESSER metamodels to generate a fully defined Domain Model.
+The Model-to-Model transformation stage was designed to function as the bridge between the DSML and the technical requirements for code generation (B-UML). During the Model-to-Model transformation stage, we developed two distinct transformation pipelines: one that converts the structural metamodel into a structural model, and another that converts the GUI metamodel into a GUI model—both based on the DSML  and implemented in Python. These programs consume the JSON exported from Blockly (DSML) and the BESSER metamodels to generate a fully defined Domain Model.
 
 The transformation process involves a linear pipeline where it takes a file exported by the Blockly editor and then the program reads and finds the root block to extract global configurations, feature flags and exchange types. Based on the enabled features, the program will instantiate the corresponding classes and set their attributes from the base metamodels and injecting them into a new Domain Model instance. The final output is a validated B-UML Domain Model.
 
