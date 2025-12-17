@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: transparent; }
+    </style>
+</head>
+<body>
+    {% set theme = dsml.theme %}
+    
+    <nav class="shadow-md" style="background-color: {{ theme.primaryColor }}; color: {{ 'white' if theme.primaryColor else 'black' }};">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 cursor-pointer" onclick="window.top.location.href='home.html'">
+                        {% if theme.logoUrl %}
+                            <img class="h-8 w-8 rounded-full" src="{{ theme.logoUrl }}" alt="Logo">
+                        {% else %}
+                            <span class="font-bold text-xl">{{ dsml.text.appName }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    {# Navigation Links #}
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="home.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+
+                            {% if gui_model.get_class_by_name('ViewAuctionsButton') %}
+                                <a href="auction.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Auctions</a>
+                            {% endif %}
+                            
+                            {% if gui_model.get_class_by_name('ViewSalesButton') %}
+                                <a href="listings.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Shop</a>
+                            {% endif %}
+
+                            {% if gui_model.get_class_by_name('ViewExchangesButton') %}
+                                <a href="exchanges.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Exchanges</a>
+                            {% endif %}
+
+                            <a href="create_listing.html" target="_top" class="hover:bg-white/30 px-3 py-2 rounded-md text-sm font-medium">Sell Item</a>
+                            
+                            {% if gui_model.get_class_by_name('ChatScreen') %}
+                                <a href="chat.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Chat</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6 space-x-3">
+                        
+                        <button onclick="window.top.location.href='profile.html'" class="p-1 rounded-full hover:bg-white/20 focus:outline-none">
+                            <span class="sr-only">View Profile</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </button>
+                        <button onclick="window.top.location.href='login.html'" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
