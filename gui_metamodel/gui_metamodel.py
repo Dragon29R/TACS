@@ -12,231 +12,224 @@ from besser.BUML.metamodel.structural import (
 )
 
 # Classes
-Frontend = Class(name="Frontend")
-CommonScreen = Class(name="CommonScreen")
-ChatScreen = Class(name="ChatScreen")
-LoginScreen = Class(name="LoginScreen")
-HomeScreen = Class(name="HomeScreen")
-NewMessageField = Class(name="NewMessageField")
-SendButton = Class(name="SendButton")
-MessageListComponent = Class(name="MessageListComponent")
-UsernameField = Class(name="UsernameField")
-PasswordField = Class(name="PasswordField")
-LoginButton = Class(name="LoginButton")
-EditProfileButton = Class(name="EditProfileButton")
-MessageCardComponent = Class(name="MessageCardComponent")
-TransactionHistoryScreen = Class(name="TransactionHistoryScreen")
-ProfileContentsComponent = Class(name="ProfileContentsComponent")
-TransactionListComponent = Class(name="TransactionListComponent")
 AppPresentationComponent = Class(name="AppPresentationComponent")
-TransactionCardComponent = Class(name="TransactionCardComponent")
 FooterComponent = Class(name="FooterComponent")
-ListingsScreen = Class(name="ListingsScreen")
 ProfileScreen = Class(name="ProfileScreen")
-ListingsListComponent = Class(name="ListingsListComponent")
 NotFoundScreen = Class(name="NotFoundScreen")
 ReviewScreen = Class(name="ReviewScreen")
-EnterListingComponent = Class(name="EnterListingComponent")
 NewReviewFormComponent = Class(name="NewReviewFormComponent")
-ListingsFilterButton = Class(name="ListingsFilterButton")
 ReviewCardComponent = Class(name="ReviewCardComponent")
-SaleCardComponent = Class(name="SaleCardComponent")
 ReviewListComponent = Class(name="ReviewListComponent")
-AuctionCardComponent = Class(name="AuctionCardComponent")
-ExchangeCardComponent = Class(name="ExchangeCardComponent")
-ListingDetailsScreen = Class(name="ListingDetailsScreen")
+Frontend = Class(name="Frontend")
 ReportScreen = Class(name="ReportScreen")
-SaleDetailsComponent = Class(name="SaleDetailsComponent")
-ExchangeDetailsComponent = Class(name="ExchangeDetailsComponent")
 NewReportFormComponent = Class(name="NewReportFormComponent")
+CommonScreen = Class(name="CommonScreen")
+ChatScreen = Class(name="ChatScreen")
 ReportCardComponent = Class(name="ReportCardComponent")
-AuctionDetailsComponent = Class(name="AuctionDetailsComponent")
+LoginScreen = Class(name="LoginScreen")
 ReportManagementComponent = Class(name="ReportManagementComponent")
-CreateListingScreen = Class(name="CreateListingScreen")
-ProductTitleField = Class(name="ProductTitleField")
-LocationField = Class(name="LocationField")
-ProductDescriptionField = Class(name="ProductDescriptionField")
-MultipleImagesUploadComponent = Class(name="MultipleImagesUploadComponent")
-SingleImageUploadComponent = Class(name="SingleImageUploadComponent")
-SubmitListingButton = Class(name="SubmitListingButton")
+HomeScreen = Class(name="HomeScreen")
+NewMessageField = Class(name="NewMessageField")
+TransactionHistoryScreen = Class(name="TransactionHistoryScreen")
+SendButton = Class(name="SendButton")
+MessageListComponent = Class(name="MessageListComponent")
+TransactionListComponent = Class(name="TransactionListComponent")
+UsernameField = Class(name="UsernameField")
+TransactionCardComponent = Class(name="TransactionCardComponent")
+PasswordField = Class(name="PasswordField")
+ListingsScreen = Class(name="ListingsScreen")
+LoginButton = Class(name="LoginButton")
+EditProfileButton = Class(name="EditProfileButton")
+ListingsListComponent = Class(name="ListingsListComponent")
+MessageCardComponent = Class(name="MessageCardComponent")
+EnterListingComponent = Class(name="EnterListingComponent")
+ProfileContentsComponent = Class(name="ProfileContentsComponent")
+ListingsFilterButton = Class(name="ListingsFilterButton")
 ListingTypeSelector = Class(name="ListingTypeSelector")
 CheckboxesComponent = Class(name="CheckboxesComponent")
+SaleCardComponent = Class(name="SaleCardComponent")
+AuctionCardComponent = Class(name="AuctionCardComponent")
 AuctionClosingTimeField = Class(name="AuctionClosingTimeField")
+ExchangeCardComponent = Class(name="ExchangeCardComponent")
 PriceField = Class(name="PriceField")
-ProfileButton = Class(name="ProfileButton")
+ListingDetailsScreen = Class(name="ListingDetailsScreen")
 PreferedExchangeTypeField = Class(name="PreferedExchangeTypeField")
-LogoutButton = Class(name="LogoutButton", metadata=Metadata(description="Can be invisible"))
+SaleDetailsComponent = Class(name="SaleDetailsComponent")
 ImageGalleryComponent = Class(name="ImageGalleryComponent")
-TopBarComponent = Class(name="TopBarComponent")
+ExchangeDetailsComponent = Class(name="ExchangeDetailsComponent")
 ProductTitleLabel = Class(name="ProductTitleLabel")
-ViewAuctionsButton = Class(name="ViewAuctionsButton")
+AuctionDetailsComponent = Class(name="AuctionDetailsComponent")
 PriceLabel = Class(name="PriceLabel")
-ViewSalesButton = Class(name="ViewSalesButton")
+CreateListingScreen = Class(name="CreateListingScreen")
+ProductTitleField = Class(name="ProductTitleField")
 BidField = Class(name="BidField")
+LocationField = Class(name="LocationField")
 BidNowButton = Class(name="BidNowButton")
-ViewExchangesButton = Class(name="ViewExchangesButton")
+ProductDescriptionField = Class(name="ProductDescriptionField")
 BuyNowButton = Class(name="BuyNowButton")
-SaleCheckbox = Class(name="SaleCheckbox")
+MultipleImagesUploadComponent = Class(name="MultipleImagesUploadComponent")
 MainImageComponent = Class(name="MainImageComponent")
-AuctionCheckbox = Class(name="AuctionCheckbox")
+SingleImageUploadComponent = Class(name="SingleImageUploadComponent")
+SubmitListingButton = Class(name="SubmitListingButton")
 ExchangeNowButton = Class(name="ExchangeNowButton")
-ExchangeCheckbox = Class(name="ExchangeCheckbox")
+ConversationsListComponent = Class(name="ConversationsListComponent")
 ProductDescriptionLabel = Class(name="ProductDescriptionLabel")
 ProposedExchangeField = Class(name="ProposedExchangeField")
-MenuButton = Class(name="MenuButton")
-
-# Frontend class attributes and methods
-
-# CommonScreen class attributes and methods
-
-# ChatScreen class attributes and methods
-
-# LoginScreen class attributes and methods
-
-# HomeScreen class attributes and methods
-
-# NewMessageField class attributes and methods
-
-# SendButton class attributes and methods
-
-# MessageListComponent class attributes and methods
-
-# UsernameField class attributes and methods
-
-# PasswordField class attributes and methods
-
-# LoginButton class attributes and methods
-
-# EditProfileButton class attributes and methods
-
-# MessageCardComponent class attributes and methods
-
-# TransactionHistoryScreen class attributes and methods
-
-# ProfileContentsComponent class attributes and methods
-
-# TransactionListComponent class attributes and methods
+ChatButton = Class(name="ChatButton")
+ProfileButton = Class(name="ProfileButton")
+LogoutButton = Class(name="LogoutButton", metadata=Metadata(description="Can be invisible"))
+TopBarComponent = Class(name="TopBarComponent")
+CreateListingButton = Class(name="CreateListingButton")
+ViewListingsButton = Class(name="ViewListingsButton")
+SaleCheckbox = Class(name="SaleCheckbox")
+AuctionCheckbox = Class(name="AuctionCheckbox")
+ExchangeCheckbox = Class(name="ExchangeCheckbox")
 
 # AppPresentationComponent class attributes and methods
 
-# TransactionCardComponent class attributes and methods
-
 # FooterComponent class attributes and methods
 
-# ListingsScreen class attributes and methods
-
 # ProfileScreen class attributes and methods
-
-# ListingsListComponent class attributes and methods
 
 # NotFoundScreen class attributes and methods
 
 # ReviewScreen class attributes and methods
 
-# EnterListingComponent class attributes and methods
-
 # NewReviewFormComponent class attributes and methods
-
-# ListingsFilterButton class attributes and methods
 
 # ReviewCardComponent class attributes and methods
 
-# SaleCardComponent class attributes and methods
-
 # ReviewListComponent class attributes and methods
 
-# AuctionCardComponent class attributes and methods
-
-# ExchangeCardComponent class attributes and methods
-
-# ListingDetailsScreen class attributes and methods
+# Frontend class attributes and methods
 
 # ReportScreen class attributes and methods
 
-# SaleDetailsComponent class attributes and methods
-
-# ExchangeDetailsComponent class attributes and methods
-
 # NewReportFormComponent class attributes and methods
+
+# CommonScreen class attributes and methods
+
+# ChatScreen class attributes and methods
 
 # ReportCardComponent class attributes and methods
 
-# AuctionDetailsComponent class attributes and methods
+# LoginScreen class attributes and methods
 
 # ReportManagementComponent class attributes and methods
 
-# CreateListingScreen class attributes and methods
+# HomeScreen class attributes and methods
 
-# ProductTitleField class attributes and methods
+# NewMessageField class attributes and methods
 
-# LocationField class attributes and methods
+# TransactionHistoryScreen class attributes and methods
 
-# ProductDescriptionField class attributes and methods
+# SendButton class attributes and methods
 
-# MultipleImagesUploadComponent class attributes and methods
+# MessageListComponent class attributes and methods
 
-# SingleImageUploadComponent class attributes and methods
+# TransactionListComponent class attributes and methods
 
-# SubmitListingButton class attributes and methods
+# UsernameField class attributes and methods
+
+# TransactionCardComponent class attributes and methods
+
+# PasswordField class attributes and methods
+
+# ListingsScreen class attributes and methods
+
+# LoginButton class attributes and methods
+
+# EditProfileButton class attributes and methods
+
+# ListingsListComponent class attributes and methods
+
+# MessageCardComponent class attributes and methods
+
+# EnterListingComponent class attributes and methods
+
+# ProfileContentsComponent class attributes and methods
+
+# ListingsFilterButton class attributes and methods
 
 # ListingTypeSelector class attributes and methods
 
 # CheckboxesComponent class attributes and methods
 
+# SaleCardComponent class attributes and methods
+
+# AuctionCardComponent class attributes and methods
+
 # AuctionClosingTimeField class attributes and methods
+
+# ExchangeCardComponent class attributes and methods
 
 # PriceField class attributes and methods
 
-# ProfileButton class attributes and methods
+# ListingDetailsScreen class attributes and methods
 
 # PreferedExchangeTypeField class attributes and methods
 
-# LogoutButton class attributes and methods
+# SaleDetailsComponent class attributes and methods
 
 # ImageGalleryComponent class attributes and methods
 
-# TopBarComponent class attributes and methods
+# ExchangeDetailsComponent class attributes and methods
 
 # ProductTitleLabel class attributes and methods
 
-# ViewAuctionsButton class attributes and methods
+# AuctionDetailsComponent class attributes and methods
 
 # PriceLabel class attributes and methods
 
-# ViewSalesButton class attributes and methods
+# CreateListingScreen class attributes and methods
+
+# ProductTitleField class attributes and methods
 
 # BidField class attributes and methods
 
+# LocationField class attributes and methods
+
 # BidNowButton class attributes and methods
 
-# ViewExchangesButton class attributes and methods
+# ProductDescriptionField class attributes and methods
 
 # BuyNowButton class attributes and methods
 
-# SaleCheckbox class attributes and methods
+# MultipleImagesUploadComponent class attributes and methods
 
 # MainImageComponent class attributes and methods
 
-# AuctionCheckbox class attributes and methods
+# SingleImageUploadComponent class attributes and methods
+
+# SubmitListingButton class attributes and methods
 
 # ExchangeNowButton class attributes and methods
 
-# ExchangeCheckbox class attributes and methods
+# ConversationsListComponent class attributes and methods
 
 # ProductDescriptionLabel class attributes and methods
 
 # ProposedExchangeField class attributes and methods
 
-# MenuButton class attributes and methods
+# ChatButton class attributes and methods
+
+# ProfileButton class attributes and methods
+
+# LogoutButton class attributes and methods
+
+# TopBarComponent class attributes and methods
+
+# CreateListingButton class attributes and methods
+
+# ViewListingsButton class attributes and methods
+
+# SaleCheckbox class attributes and methods
+
+# AuctionCheckbox class attributes and methods
+
+# ExchangeCheckbox class attributes and methods
 
 # Relationships
-SendButton_ChatScreen: BinaryAssociation = BinaryAssociation(
-    name="SendButton_ChatScreen",
-    ends={
-        Property(name="sendbutton", type=SendButton, multiplicity=Multiplicity(1, 1)),
-        Property(name="chatscreen", type=ChatScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
 NewMessageField_ChatScreen: BinaryAssociation = BinaryAssociation(
     name="NewMessageField_ChatScreen",
     ends={
@@ -258,13 +251,6 @@ UsernameField_LoginScreen: BinaryAssociation = BinaryAssociation(
         Property(name="loginscreen", type=LoginScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-HomeScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
-    name="HomeScreen_CommonScreen",
-    ends={
-        Property(name="homescreen_1", type=HomeScreen, multiplicity=Multiplicity(1, 1)),
-        Property(name="commonscreen_3", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
 PasswordField_LoginScreen: BinaryAssociation = BinaryAssociation(
     name="PasswordField_LoginScreen",
     ends={
@@ -279,11 +265,11 @@ CommonScreen_Frontend: BinaryAssociation = BinaryAssociation(
         Property(name="frontend", type=Frontend, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-ProfileContentsComponent_ProfileScreen: BinaryAssociation = BinaryAssociation(
-    name="ProfileContentsComponent_ProfileScreen",
+SendButton_ChatScreen: BinaryAssociation = BinaryAssociation(
+    name="SendButton_ChatScreen",
     ends={
-        Property(name="profilecontentscomponent", type=ProfileContentsComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="profilescreen", type=ProfileScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="sendbutton", type=SendButton, multiplicity=Multiplicity(1, 1)),
+        Property(name="chatscreen", type=ChatScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 LoginButton_LoginScreen: BinaryAssociation = BinaryAssociation(
@@ -291,13 +277,6 @@ LoginButton_LoginScreen: BinaryAssociation = BinaryAssociation(
     ends={
         Property(name="loginbutton", type=LoginButton, multiplicity=Multiplicity(1, 1)),
         Property(name="loginscreen_2", type=LoginScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
-EditProfileButton_ProfileScreen: BinaryAssociation = BinaryAssociation(
-    name="EditProfileButton_ProfileScreen",
-    ends={
-        Property(name="editprofilebutton", type=EditProfileButton, multiplicity=Multiplicity(1, 1)),
-        Property(name="profilescreen_1", type=ProfileScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 AppPresentationComponent_HomeScreen: BinaryAssociation = BinaryAssociation(
@@ -310,8 +289,8 @@ AppPresentationComponent_HomeScreen: BinaryAssociation = BinaryAssociation(
 ProfileScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
     name="ProfileScreen_CommonScreen",
     ends={
-        Property(name="profilescreen_2", type=ProfileScreen, multiplicity=Multiplicity(1, 1)),
-        Property(name="commonscreen_4", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="commonscreen_4", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True),
+        Property(name="profilescreen_2", type=ProfileScreen, multiplicity=Multiplicity(1, 1))
     }
 )
 LoginScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
@@ -342,11 +321,11 @@ NewReviewFormComponent_ReviewScreen: BinaryAssociation = BinaryAssociation(
         Property(name="reviewscreen", type=ReviewScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-ReviewScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
-    name="ReviewScreen_CommonScreen",
+HomeScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
+    name="HomeScreen_CommonScreen",
     ends={
-        Property(name="reviewscreen_3", type=ReviewScreen, multiplicity=Multiplicity(1, 1)),
-        Property(name="commonscreen_6", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="homescreen_1", type=HomeScreen, multiplicity=Multiplicity(1, 1)),
+        Property(name="commonscreen_3", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ReviewCardComponent_ReviewScreen: BinaryAssociation = BinaryAssociation(
@@ -356,11 +335,11 @@ ReviewCardComponent_ReviewScreen: BinaryAssociation = BinaryAssociation(
         Property(name="reviewscreen_1", type=ReviewScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-ReportScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
-    name="ReportScreen_CommonScreen",
+ProfileContentsComponent_ProfileScreen: BinaryAssociation = BinaryAssociation(
+    name="ProfileContentsComponent_ProfileScreen",
     ends={
-        Property(name="reportscreen_3", type=ReportScreen, multiplicity=Multiplicity(1, 1)),
-        Property(name="commonscreen_7", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="profilecontentscomponent", type=ProfileContentsComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="profilescreen", type=ProfileScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ReviewListComponent_ReviewScreen: BinaryAssociation = BinaryAssociation(
@@ -370,6 +349,13 @@ ReviewListComponent_ReviewScreen: BinaryAssociation = BinaryAssociation(
         Property(name="reviewscreen_2", type=ReviewScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
+EditProfileButton_ProfileScreen: BinaryAssociation = BinaryAssociation(
+    name="EditProfileButton_ProfileScreen",
+    ends={
+        Property(name="editprofilebutton", type=EditProfileButton, multiplicity=Multiplicity(1, 1)),
+        Property(name="profilescreen_1", type=ProfileScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
 NewReportFormComponent_ReportScreen: BinaryAssociation = BinaryAssociation(
     name="NewReportFormComponent_ReportScreen",
     ends={
@@ -377,11 +363,11 @@ NewReportFormComponent_ReportScreen: BinaryAssociation = BinaryAssociation(
         Property(name="reportscreen", type=ReportScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-TransactionListComponent_TransactionHistoryScreen: BinaryAssociation = BinaryAssociation(
-    name="TransactionListComponent_TransactionHistoryScreen",
+TransactionCardComponent_TransactionHistoryScreen: BinaryAssociation = BinaryAssociation(
+    name="TransactionCardComponent_TransactionHistoryScreen",
     ends={
-        Property(name="transactionlistcomponent", type=TransactionListComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="transactionhistoryscreen", type=TransactionHistoryScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="transactioncardcomponent", type=TransactionCardComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="transactionhistoryscreen_1", type=TransactionHistoryScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ReportCardComponent_ReportScreen: BinaryAssociation = BinaryAssociation(
@@ -389,13 +375,6 @@ ReportCardComponent_ReportScreen: BinaryAssociation = BinaryAssociation(
     ends={
         Property(name="reportcardcomponent", type=ReportCardComponent, multiplicity=Multiplicity(1, 1)),
         Property(name="reportscreen_1", type=ReportScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
-TransactionCardComponent_TransactionHistoryScreen: BinaryAssociation = BinaryAssociation(
-    name="TransactionCardComponent_TransactionHistoryScreen",
-    ends={
-        Property(name="transactioncardcomponent", type=TransactionCardComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="transactionhistoryscreen_1", type=TransactionHistoryScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ReportManagementComponent_ReportScreen: BinaryAssociation = BinaryAssociation(
@@ -412,11 +391,11 @@ TransactionHistoryScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
         Property(name="commonscreen_8", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-ExchangeCardComponent_ListingsListComponent: BinaryAssociation = BinaryAssociation(
-    name="ExchangeCardComponent_ListingsListComponent",
+ReviewScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
+    name="ReviewScreen_CommonScreen",
     ends={
-        Property(name="exchangecardcomponent", type=ExchangeCardComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="listingslistcomponent_2", type=ListingsListComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="reviewscreen_3", type=ReviewScreen, multiplicity=Multiplicity(1, 1)),
+        Property(name="commonscreen_6", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ListingsListComponent_ListingsScreen: BinaryAssociation = BinaryAssociation(
@@ -426,13 +405,6 @@ ListingsListComponent_ListingsScreen: BinaryAssociation = BinaryAssociation(
         Property(name="listingsscreen", type=ListingsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-AuctionCardComponent_ListingsListComponent: BinaryAssociation = BinaryAssociation(
-    name="AuctionCardComponent_ListingsListComponent",
-    ends={
-        Property(name="auctioncardcomponent", type=AuctionCardComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="listingslistcomponent_3", type=ListingsListComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
 EnterListingComponent_ListingsScreen: BinaryAssociation = BinaryAssociation(
     name="EnterListingComponent_ListingsScreen",
     ends={
@@ -440,11 +412,11 @@ EnterListingComponent_ListingsScreen: BinaryAssociation = BinaryAssociation(
         Property(name="listingsscreen_1", type=ListingsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-SaleDetailsComponent_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
-    name="SaleDetailsComponent_ListingDetailsScreen",
+ReportScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
+    name="ReportScreen_CommonScreen",
     ends={
-        Property(name="saledetailscomponent", type=SaleDetailsComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="listingdetailsscreen", type=ListingDetailsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="reportscreen_3", type=ReportScreen, multiplicity=Multiplicity(1, 1)),
+        Property(name="commonscreen_7", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ListingsFilterButton_ListingsScreen: BinaryAssociation = BinaryAssociation(
@@ -454,11 +426,25 @@ ListingsFilterButton_ListingsScreen: BinaryAssociation = BinaryAssociation(
         Property(name="listingsscreen_2", type=ListingsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
+TransactionListComponent_TransactionHistoryScreen: BinaryAssociation = BinaryAssociation(
+    name="TransactionListComponent_TransactionHistoryScreen",
+    ends={
+        Property(name="transactionlistcomponent", type=TransactionListComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="transactionhistoryscreen", type=TransactionHistoryScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
 ListingsScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
     name="ListingsScreen_CommonScreen",
     ends={
         Property(name="listingsscreen_3", type=ListingsScreen, multiplicity=Multiplicity(1, 1)),
         Property(name="commonscreen_9", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+SaleDetailsComponent_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
+    name="SaleDetailsComponent_ListingDetailsScreen",
+    ends={
+        Property(name="saledetailscomponent", type=SaleDetailsComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="listingdetailsscreen", type=ListingDetailsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ExchangeDetailsComponent_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
@@ -468,13 +454,6 @@ ExchangeDetailsComponent_ListingDetailsScreen: BinaryAssociation = BinaryAssocia
         Property(name="listingdetailsscreen_1", type=ListingDetailsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-AuctionDetailsComponent_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
-    name="AuctionDetailsComponent_ListingDetailsScreen",
-    ends={
-        Property(name="auctiondetailscomponent", type=AuctionDetailsComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="listingdetailsscreen_2", type=ListingDetailsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
 SaleCardComponent_ListingsListComponent: BinaryAssociation = BinaryAssociation(
     name="SaleCardComponent_ListingsListComponent",
     ends={
@@ -482,11 +461,18 @@ SaleCardComponent_ListingsListComponent: BinaryAssociation = BinaryAssociation(
         Property(name="listingslistcomponent_1", type=ListingsListComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-CreateListingScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
-    name="CreateListingScreen_CommonScreen",
+AuctionDetailsComponent_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
+    name="AuctionDetailsComponent_ListingDetailsScreen",
     ends={
-        Property(name="createlistingscreen_3", type=CreateListingScreen, multiplicity=Multiplicity(1, 1)),
-        Property(name="commonscreen_11", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="auctiondetailscomponent", type=AuctionDetailsComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="listingdetailsscreen_2", type=ListingDetailsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+ExchangeCardComponent_ListingsListComponent: BinaryAssociation = BinaryAssociation(
+    name="ExchangeCardComponent_ListingsListComponent",
+    ends={
+        Property(name="exchangecardcomponent", type=ExchangeCardComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="listingslistcomponent_2", type=ListingsListComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ListingDetailsScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
@@ -496,11 +482,11 @@ ListingDetailsScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
         Property(name="commonscreen_10", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-MultipleImagesUploadComponent_CreateListingScreen: BinaryAssociation = BinaryAssociation(
-    name="MultipleImagesUploadComponent_CreateListingScreen",
+AuctionCardComponent_ListingsListComponent: BinaryAssociation = BinaryAssociation(
+    name="AuctionCardComponent_ListingsListComponent",
     ends={
-        Property(name="multipleimagesuploadcomponent", type=MultipleImagesUploadComponent, multiplicity=Multiplicity(1, 1)),
-        Property(name="createlistingscreen_4", type=CreateListingScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="auctioncardcomponent", type=AuctionCardComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="listingslistcomponent_3", type=ListingsListComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ProductTitleField_CreateListingScreen: BinaryAssociation = BinaryAssociation(
@@ -508,6 +494,13 @@ ProductTitleField_CreateListingScreen: BinaryAssociation = BinaryAssociation(
     ends={
         Property(name="producttitlefield", type=ProductTitleField, multiplicity=Multiplicity(1, 1)),
         Property(name="createlistingscreen", type=CreateListingScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+MultipleImagesUploadComponent_CreateListingScreen: BinaryAssociation = BinaryAssociation(
+    name="MultipleImagesUploadComponent_CreateListingScreen",
+    ends={
+        Property(name="multipleimagesuploadcomponent", type=MultipleImagesUploadComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="createlistingscreen_4", type=CreateListingScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 LocationField_CreateListingScreen: BinaryAssociation = BinaryAssociation(
@@ -538,11 +531,11 @@ SubmitListingButton_CreateListingScreen: BinaryAssociation = BinaryAssociation(
         Property(name="createlistingscreen_6", type=CreateListingScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-AuctionClosingTimeField_ListingTypeSelector: BinaryAssociation = BinaryAssociation(
-    name="AuctionClosingTimeField_ListingTypeSelector",
+CreateListingScreen_CommonScreen: BinaryAssociation = BinaryAssociation(
+    name="CreateListingScreen_CommonScreen",
     ends={
-        Property(name="auctionclosingtimefield", type=AuctionClosingTimeField, multiplicity=Multiplicity(1, 1)),
-        Property(name="listingtypeselector_3", type=ListingTypeSelector, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="createlistingscreen_3", type=CreateListingScreen, multiplicity=Multiplicity(1, 1)),
+        Property(name="commonscreen_11", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ListingTypeSelector_CreateListingScreen: BinaryAssociation = BinaryAssociation(
@@ -550,13 +543,6 @@ ListingTypeSelector_CreateListingScreen: BinaryAssociation = BinaryAssociation(
     ends={
         Property(name="listingtypeselector", type=ListingTypeSelector, multiplicity=Multiplicity(1, 1)),
         Property(name="createlistingscreen_7", type=CreateListingScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
-PreferedExchangeTypeField_ListingTypeSelector: BinaryAssociation = BinaryAssociation(
-    name="PreferedExchangeTypeField_ListingTypeSelector",
-    ends={
-        Property(name="preferedexchangetypefield", type=PreferedExchangeTypeField, multiplicity=Multiplicity(1, 1)),
-        Property(name="listingtypeselector_4", type=ListingTypeSelector, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 CheckboxesComponent_ListingTypeSelector: BinaryAssociation = BinaryAssociation(
@@ -587,11 +573,11 @@ ImageGalleryComponent_ListingDetailsScreen: BinaryAssociation = BinaryAssociatio
         Property(name="listingdetailsscreen_5", type=ListingDetailsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-PriceLabel_SaleDetailsComponent: BinaryAssociation = BinaryAssociation(
-    name="PriceLabel_SaleDetailsComponent",
+AuctionClosingTimeField_ListingTypeSelector: BinaryAssociation = BinaryAssociation(
+    name="AuctionClosingTimeField_ListingTypeSelector",
     ends={
-        Property(name="saledetailscomponent_2", type=SaleDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True),
-        Property(name="pricelabel", type=PriceLabel, multiplicity=Multiplicity(1, 1))
+        Property(name="auctionclosingtimefield", type=AuctionClosingTimeField, multiplicity=Multiplicity(1, 1)),
+        Property(name="listingtypeselector_3", type=ListingTypeSelector, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ProductTitleLabel_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
@@ -601,11 +587,11 @@ ProductTitleLabel_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
         Property(name="listingdetailsscreen_6", type=ListingDetailsScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-BidNowButton_AuctionDetailsComponent: BinaryAssociation = BinaryAssociation(
-    name="BidNowButton_AuctionDetailsComponent",
+PreferedExchangeTypeField_ListingTypeSelector: BinaryAssociation = BinaryAssociation(
+    name="PreferedExchangeTypeField_ListingTypeSelector",
     ends={
-        Property(name="bidnowbutton", type=BidNowButton, multiplicity=Multiplicity(1, 1)),
-        Property(name="auctiondetailscomponent_1", type=AuctionDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="preferedexchangetypefield", type=PreferedExchangeTypeField, multiplicity=Multiplicity(1, 1)),
+        Property(name="listingtypeselector_4", type=ListingTypeSelector, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ProductDescriptionLabel_ListingDetailsScreen: BinaryAssociation = BinaryAssociation(
@@ -618,8 +604,8 @@ ProductDescriptionLabel_ListingDetailsScreen: BinaryAssociation = BinaryAssociat
 BidField_AuctionDetailsComponent: BinaryAssociation = BinaryAssociation(
     name="BidField_AuctionDetailsComponent",
     ends={
-        Property(name="bidfield", type=BidField, multiplicity=Multiplicity(1, 1)),
-        Property(name="auctiondetailscomponent_2", type=AuctionDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="auctiondetailscomponent_2", type=AuctionDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True),
+        Property(name="bidfield", type=BidField, multiplicity=Multiplicity(1, 1))
     }
 )
 BuyNowButton_SaleDetailsComponent: BinaryAssociation = BinaryAssociation(
@@ -636,11 +622,11 @@ ExchangeNowButton_ExchangeDetailsComponent: BinaryAssociation = BinaryAssociatio
         Property(name="exchangedetailscomponent_1", type=ExchangeDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-TopBarComponent_CommonScreen: BinaryAssociation = BinaryAssociation(
-    name="TopBarComponent_CommonScreen",
+PriceLabel_SaleDetailsComponent: BinaryAssociation = BinaryAssociation(
+    name="PriceLabel_SaleDetailsComponent",
     ends={
-        Property(name="commonscreen_12", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True),
-        Property(name="topbarcomponent", type=TopBarComponent, multiplicity=Multiplicity(1, 1))
+        Property(name="pricelabel", type=PriceLabel, multiplicity=Multiplicity(1, 1)),
+        Property(name="saledetailscomponent_2", type=SaleDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ProposedExchangeField_ExchangeDetailsComponent: BinaryAssociation = BinaryAssociation(
@@ -650,6 +636,13 @@ ProposedExchangeField_ExchangeDetailsComponent: BinaryAssociation = BinaryAssoci
         Property(name="exchangedetailscomponent_2", type=ExchangeDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
+BidNowButton_AuctionDetailsComponent: BinaryAssociation = BinaryAssociation(
+    name="BidNowButton_AuctionDetailsComponent",
+    ends={
+        Property(name="bidnowbutton", type=BidNowButton, multiplicity=Multiplicity(1, 1)),
+        Property(name="auctiondetailscomponent_1", type=AuctionDetailsComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
 MessageCardComponent_MessageListComponent: BinaryAssociation = BinaryAssociation(
     name="MessageCardComponent_MessageListComponent",
     ends={
@@ -657,11 +650,11 @@ MessageCardComponent_MessageListComponent: BinaryAssociation = BinaryAssociation
         Property(name="messagelistcomponent_1", type=MessageListComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-MenuButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
-    name="MenuButton_TopBarComponent",
+ProfileButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
+    name="ProfileButton_TopBarComponent",
     ends={
-        Property(name="menubutton", type=MenuButton, multiplicity=Multiplicity(1, 1)),
-        Property(name="topbarcomponent_1", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+        Property(name="topbarcomponent_2", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True),
+        Property(name="profilebutton", type=ProfileButton, multiplicity=Multiplicity(1, 1))
     }
 )
 FooterComponent_HomeScreen: BinaryAssociation = BinaryAssociation(
@@ -671,25 +664,46 @@ FooterComponent_HomeScreen: BinaryAssociation = BinaryAssociation(
         Property(name="homescreen_2", type=HomeScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-ProfileButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
-    name="ProfileButton_TopBarComponent",
-    ends={
-        Property(name="profilebutton", type=ProfileButton, multiplicity=Multiplicity(1, 1)),
-        Property(name="topbarcomponent_2", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
-ViewExchangesButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
-    name="ViewExchangesButton_TopBarComponent",
-    ends={
-        Property(name="topbarcomponent_6", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True),
-        Property(name="viewexchangesbutton", type=ViewExchangesButton, multiplicity=Multiplicity(1, 1))
-    }
-)
 LogoutButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
     name="LogoutButton_TopBarComponent",
     ends={
         Property(name="logoutbutton", type=LogoutButton, multiplicity=Multiplicity(1, 1)),
         Property(name="topbarcomponent_3", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+TopBarComponent_CommonScreen: BinaryAssociation = BinaryAssociation(
+    name="TopBarComponent_CommonScreen",
+    ends={
+        Property(name="topbarcomponent", type=TopBarComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="commonscreen_12", type=CommonScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+CreateListingButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
+    name="CreateListingButton_TopBarComponent",
+    ends={
+        Property(name="createlistingbutton", type=CreateListingButton, multiplicity=Multiplicity(1, 1)),
+        Property(name="topbarcomponent_4", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+ChatButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
+    name="ChatButton_TopBarComponent",
+    ends={
+        Property(name="chatbutton", type=ChatButton, multiplicity=Multiplicity(1, 1)),
+        Property(name="topbarcomponent_1", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+ViewListingsButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
+    name="ViewListingsButton_TopBarComponent",
+    ends={
+        Property(name="viewlistingsbutton", type=ViewListingsButton, multiplicity=Multiplicity(1, 1)),
+        Property(name="topbarcomponent_5", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
+    }
+)
+ConversationsListComponent_ChatScreen: BinaryAssociation = BinaryAssociation(
+    name="ConversationsListComponent_ChatScreen",
+    ends={
+        Property(name="conversationslistcomponent", type=ConversationsListComponent, multiplicity=Multiplicity(1, 1)),
+        Property(name="chatscreen_4", type=ChatScreen, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 SaleCheckbox_CheckboxesComponent: BinaryAssociation = BinaryAssociation(
@@ -699,25 +713,11 @@ SaleCheckbox_CheckboxesComponent: BinaryAssociation = BinaryAssociation(
         Property(name="checkboxescomponent_1", type=CheckboxesComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
-ViewAuctionsButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
-    name="ViewAuctionsButton_TopBarComponent",
-    ends={
-        Property(name="viewauctionsbutton", type=ViewAuctionsButton, multiplicity=Multiplicity(1, 1)),
-        Property(name="topbarcomponent_4", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
 AuctionCheckbox_CheckboxesComponent: BinaryAssociation = BinaryAssociation(
     name="AuctionCheckbox_CheckboxesComponent",
     ends={
         Property(name="auctioncheckbox", type=AuctionCheckbox, multiplicity=Multiplicity(1, 1)),
         Property(name="checkboxescomponent_2", type=CheckboxesComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
-    }
-)
-ViewSalesButton_TopBarComponent: BinaryAssociation = BinaryAssociation(
-    name="ViewSalesButton_TopBarComponent",
-    ends={
-        Property(name="viewsalesbutton", type=ViewSalesButton, multiplicity=Multiplicity(1, 1)),
-        Property(name="topbarcomponent_5", type=TopBarComponent, multiplicity=Multiplicity(1, 1), is_composite=True)
     }
 )
 ExchangeCheckbox_CheckboxesComponent: BinaryAssociation = BinaryAssociation(
@@ -731,8 +731,8 @@ ExchangeCheckbox_CheckboxesComponent: BinaryAssociation = BinaryAssociation(
 # Domain Model
 domain_model = DomainModel(
     name="gui_metamodel",
-    types={Frontend, CommonScreen, ChatScreen, LoginScreen, HomeScreen, NewMessageField, SendButton, MessageListComponent, UsernameField, PasswordField, LoginButton, EditProfileButton, MessageCardComponent, TransactionHistoryScreen, ProfileContentsComponent, TransactionListComponent, AppPresentationComponent, TransactionCardComponent, FooterComponent, ListingsScreen, ProfileScreen, ListingsListComponent, NotFoundScreen, ReviewScreen, EnterListingComponent, NewReviewFormComponent, ListingsFilterButton, ReviewCardComponent, SaleCardComponent, ReviewListComponent, AuctionCardComponent, ExchangeCardComponent, ListingDetailsScreen, ReportScreen, SaleDetailsComponent, ExchangeDetailsComponent, NewReportFormComponent, ReportCardComponent, AuctionDetailsComponent, ReportManagementComponent, CreateListingScreen, ProductTitleField, LocationField, ProductDescriptionField, MultipleImagesUploadComponent, SingleImageUploadComponent, SubmitListingButton, ListingTypeSelector, CheckboxesComponent, AuctionClosingTimeField, PriceField, ProfileButton, PreferedExchangeTypeField, LogoutButton, ImageGalleryComponent, TopBarComponent, ProductTitleLabel, ViewAuctionsButton, PriceLabel, ViewSalesButton, BidField, BidNowButton, ViewExchangesButton, BuyNowButton, SaleCheckbox, MainImageComponent, AuctionCheckbox, ExchangeNowButton, ExchangeCheckbox, ProductDescriptionLabel, ProposedExchangeField, MenuButton},
-    associations={SendButton_ChatScreen, NewMessageField_ChatScreen, MessageListComponent_ChatScreen, UsernameField_LoginScreen, HomeScreen_CommonScreen, PasswordField_LoginScreen, CommonScreen_Frontend, ProfileContentsComponent_ProfileScreen, LoginButton_LoginScreen, EditProfileButton_ProfileScreen, AppPresentationComponent_HomeScreen, ProfileScreen_CommonScreen, LoginScreen_CommonScreen, NotFoundScreen_CommonScreen, ChatScreen_CommonScreen, NewReviewFormComponent_ReviewScreen, ReviewScreen_CommonScreen, ReviewCardComponent_ReviewScreen, ReportScreen_CommonScreen, ReviewListComponent_ReviewScreen, NewReportFormComponent_ReportScreen, TransactionListComponent_TransactionHistoryScreen, ReportCardComponent_ReportScreen, TransactionCardComponent_TransactionHistoryScreen, ReportManagementComponent_ReportScreen, TransactionHistoryScreen_CommonScreen, ExchangeCardComponent_ListingsListComponent, ListingsListComponent_ListingsScreen, AuctionCardComponent_ListingsListComponent, EnterListingComponent_ListingsScreen, SaleDetailsComponent_ListingDetailsScreen, ListingsFilterButton_ListingsScreen, ListingsScreen_CommonScreen, ExchangeDetailsComponent_ListingDetailsScreen, AuctionDetailsComponent_ListingDetailsScreen, SaleCardComponent_ListingsListComponent, CreateListingScreen_CommonScreen, ListingDetailsScreen_CommonScreen, MultipleImagesUploadComponent_CreateListingScreen, ProductTitleField_CreateListingScreen, LocationField_CreateListingScreen, SingleImageUploadComponent_CreateListingScreen, ProductDescriptionField_CreateListingScreen, SubmitListingButton_CreateListingScreen, AuctionClosingTimeField_ListingTypeSelector, ListingTypeSelector_CreateListingScreen, PreferedExchangeTypeField_ListingTypeSelector, CheckboxesComponent_ListingTypeSelector, MainImageComponent_ListingDetailsScreen, PriceField_ListingTypeSelector, ImageGalleryComponent_ListingDetailsScreen, PriceLabel_SaleDetailsComponent, ProductTitleLabel_ListingDetailsScreen, BidNowButton_AuctionDetailsComponent, ProductDescriptionLabel_ListingDetailsScreen, BidField_AuctionDetailsComponent, BuyNowButton_SaleDetailsComponent, ExchangeNowButton_ExchangeDetailsComponent, TopBarComponent_CommonScreen, ProposedExchangeField_ExchangeDetailsComponent, MessageCardComponent_MessageListComponent, MenuButton_TopBarComponent, FooterComponent_HomeScreen, ProfileButton_TopBarComponent, ViewExchangesButton_TopBarComponent, LogoutButton_TopBarComponent, SaleCheckbox_CheckboxesComponent, ViewAuctionsButton_TopBarComponent, AuctionCheckbox_CheckboxesComponent, ViewSalesButton_TopBarComponent, ExchangeCheckbox_CheckboxesComponent},
+    types={AppPresentationComponent, FooterComponent, ProfileScreen, NotFoundScreen, ReviewScreen, NewReviewFormComponent, ReviewCardComponent, ReviewListComponent, Frontend, ReportScreen, NewReportFormComponent, CommonScreen, ChatScreen, ReportCardComponent, LoginScreen, ReportManagementComponent, HomeScreen, NewMessageField, TransactionHistoryScreen, SendButton, MessageListComponent, TransactionListComponent, UsernameField, TransactionCardComponent, PasswordField, ListingsScreen, LoginButton, EditProfileButton, ListingsListComponent, MessageCardComponent, EnterListingComponent, ProfileContentsComponent, ListingsFilterButton, ListingTypeSelector, CheckboxesComponent, SaleCardComponent, AuctionCardComponent, AuctionClosingTimeField, ExchangeCardComponent, PriceField, ListingDetailsScreen, PreferedExchangeTypeField, SaleDetailsComponent, ImageGalleryComponent, ExchangeDetailsComponent, ProductTitleLabel, AuctionDetailsComponent, PriceLabel, CreateListingScreen, ProductTitleField, BidField, LocationField, BidNowButton, ProductDescriptionField, BuyNowButton, MultipleImagesUploadComponent, MainImageComponent, SingleImageUploadComponent, SubmitListingButton, ExchangeNowButton, ConversationsListComponent, ProductDescriptionLabel, ProposedExchangeField, ChatButton, ProfileButton, LogoutButton, TopBarComponent, CreateListingButton, ViewListingsButton, SaleCheckbox, AuctionCheckbox, ExchangeCheckbox},
+    associations={NewMessageField_ChatScreen, MessageListComponent_ChatScreen, UsernameField_LoginScreen, PasswordField_LoginScreen, CommonScreen_Frontend, SendButton_ChatScreen, LoginButton_LoginScreen, AppPresentationComponent_HomeScreen, ProfileScreen_CommonScreen, LoginScreen_CommonScreen, NotFoundScreen_CommonScreen, ChatScreen_CommonScreen, NewReviewFormComponent_ReviewScreen, HomeScreen_CommonScreen, ReviewCardComponent_ReviewScreen, ProfileContentsComponent_ProfileScreen, ReviewListComponent_ReviewScreen, EditProfileButton_ProfileScreen, NewReportFormComponent_ReportScreen, TransactionCardComponent_TransactionHistoryScreen, ReportCardComponent_ReportScreen, ReportManagementComponent_ReportScreen, TransactionHistoryScreen_CommonScreen, ReviewScreen_CommonScreen, ListingsListComponent_ListingsScreen, EnterListingComponent_ListingsScreen, ReportScreen_CommonScreen, ListingsFilterButton_ListingsScreen, TransactionListComponent_TransactionHistoryScreen, ListingsScreen_CommonScreen, SaleDetailsComponent_ListingDetailsScreen, ExchangeDetailsComponent_ListingDetailsScreen, SaleCardComponent_ListingsListComponent, AuctionDetailsComponent_ListingDetailsScreen, ExchangeCardComponent_ListingsListComponent, ListingDetailsScreen_CommonScreen, AuctionCardComponent_ListingsListComponent, ProductTitleField_CreateListingScreen, MultipleImagesUploadComponent_CreateListingScreen, LocationField_CreateListingScreen, SingleImageUploadComponent_CreateListingScreen, ProductDescriptionField_CreateListingScreen, SubmitListingButton_CreateListingScreen, CreateListingScreen_CommonScreen, ListingTypeSelector_CreateListingScreen, CheckboxesComponent_ListingTypeSelector, MainImageComponent_ListingDetailsScreen, PriceField_ListingTypeSelector, ImageGalleryComponent_ListingDetailsScreen, AuctionClosingTimeField_ListingTypeSelector, ProductTitleLabel_ListingDetailsScreen, PreferedExchangeTypeField_ListingTypeSelector, ProductDescriptionLabel_ListingDetailsScreen, BidField_AuctionDetailsComponent, BuyNowButton_SaleDetailsComponent, ExchangeNowButton_ExchangeDetailsComponent, PriceLabel_SaleDetailsComponent, ProposedExchangeField_ExchangeDetailsComponent, BidNowButton_AuctionDetailsComponent, MessageCardComponent_MessageListComponent, ProfileButton_TopBarComponent, FooterComponent_HomeScreen, LogoutButton_TopBarComponent, TopBarComponent_CommonScreen, CreateListingButton_TopBarComponent, ChatButton_TopBarComponent, ViewListingsButton_TopBarComponent, ConversationsListComponent_ChatScreen, SaleCheckbox_CheckboxesComponent, AuctionCheckbox_CheckboxesComponent, ExchangeCheckbox_CheckboxesComponent},
     generalizations={},
     metadata=None
 )

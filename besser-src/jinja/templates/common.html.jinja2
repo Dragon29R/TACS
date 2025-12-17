@@ -30,19 +30,11 @@
                         <div class="ml-10 flex items-baseline space-x-4">
                             <a href="home.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Home</a>
 
-                            {% if gui_model.get_class_by_name('ViewAuctionsButton') %}
-                                <a href="auction.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Auctions</a>
-                            {% endif %}
-                            
-                            {% if gui_model.get_class_by_name('ViewSalesButton') %}
+                            {% if gui_model.get_class_by_name('ViewListingsButton') %}
                                 <a href="listings.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Shop</a>
                             {% endif %}
 
-                            {% if gui_model.get_class_by_name('ViewExchangesButton') %}
-                                <a href="exchanges.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Exchanges</a>
-                            {% endif %}
-
-                            <a href="create_listing.html" target="_top" class="hover:bg-white/30 px-3 py-2 rounded-md text-sm font-medium">Sell Item</a>
+                            <a href="create_listing.html" target="_top" class="hover:bg-white/30 px-3 py-2 rounded-md text-sm font-medium">Sell an Item</a>
                             
                             {% if gui_model.get_class_by_name('ChatScreen') %}
                                 <a href="chat.html" target="_top" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">Chat</a>
@@ -54,15 +46,19 @@
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6 space-x-3">
                         
+                        {% if gui_model.get_class_by_name('ProfileButton') %}
                         <button onclick="window.top.location.href='profile.html'" class="p-1 rounded-full hover:bg-white/20 focus:outline-none">
                             <span class="sr-only">View Profile</span>
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </button>
+                        {% endif %}
+                        {% if gui_model.get_class_by_name('LogoutButton') %}
                         <button onclick="window.top.location.href='login.html'" class="hover:bg-white/20 px-3 py-2 rounded-md text-sm font-medium">
                             Logout
                         </button>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -49,8 +49,6 @@ def build_core_gui(gui_model: DomainModel):
     add_gui_elements(["Frontend", "CommonScreen"], gui_model, gui_metamodel)
     core_screens = [
         "HomeScreen",
-        "LoginScreen",
-        "ProfileScreen",
         "ListingsScreen",
         "ListingDetailsScreen",
         "CreateListingScreen",
@@ -76,9 +74,7 @@ def build_core_gui(gui_model: DomainModel):
         "MainImageComponent",
         "ProductTitleLabel",
         "ProductDescriptionLabel",
-        "ProfileButton",
-        "LogoutButton",
-        "MenuButton"
+        "ViewListingsButton"
     ]
 
     # Mandatory listing components
@@ -91,6 +87,27 @@ def build_core_gui(gui_model: DomainModel):
         "CheckboxesComponent"
     ]
     add_gui_elements(listing_form_components, gui_model, gui_metamodel)
+
+
+def build_auth_gui(app_block, gui_model: DomainModel):
+    features = app_block['inputs']['FEATURES']['block']['fields']
+    auth_mode = features.get('authMode', 'None')
+    if auth_mode != "None":
+        auth_screens = [
+            "LoginScreen",
+            "ProfileScreen"
+        ]
+        auth_components = [
+            "UsernameField",
+            "PasswordField",
+            "LoginButton",
+            "ProfileContentsComponent",
+            "EditProfileButton",
+            "ProfileButton",
+            "LogoutButton"
+        ]
+        add_gui_elements(auth_screens, gui_model, gui_metamodel)
+        add_gui_elements(auth_components, gui_model, gui_metamodel)
 
 def build_exchange_type_gui(app_block, gui_model: DomainModel):
     item_config = app_block['inputs']['ITEMCONFIG']['block']
@@ -196,7 +213,7 @@ def create_gui_model_from_dsml(dsml_path: str) -> DomainModel:
     build_exchange_type_gui(app_block, gui_model)
     build_features_gui(app_block, gui_model)
     build_item_config_gui(app_block, gui_model)
-    
+    build_auth_gui(app_block, gui_model)
     return gui_model
 
 if __name__ == "__main__":
