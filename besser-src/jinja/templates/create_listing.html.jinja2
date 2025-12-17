@@ -1,37 +1,92 @@
 {% extends "base.html.jinja2" %}
 
 {% block content %}
-    {% set item_class = structural_model.get_class('Item') %}
+<div id="CreateListingScreen" class="max-w-4xl mx-auto space-y-8">
+    <h2 class="text-3xl font-extrabold theme-text-main">Create New Item Listing</h2>
 
-    {% for component in screen.components %}
+    <form class="space-y-6">
         
-        {# 1. Check if the GUI component is a form related to the Item class #}
-        {% if component.name == 'ItemForm' %}
-            
-            <h2>Create New Item Listing</h2>
-            
-            {% for attribute in item_class.attributes %}
-                
-                {# 2. Use DSML to filter required fields (e.g., skip location if disabled) #}
-                {% if attribute.name == 'location' and dsml.blocks[0].inputs.ITEMCONFIG.block.fields.enableItemLocation == 'False' %}
-                    {# SKIP THIS ATTRIBUTE #}
-                {% else %}
-                
-                    <div class="form-group">
-                        <label>{{ attribute.name | capitalize }}</label>
-                        
-                        {# 3. Use Structural Model type to set HTML input type #}
-                        {% if attribute.type.name == 'Integer' %}
-                            <input type="number" name="{{ attribute.name }}" />
-                        {% elif attribute.type.name == 'String' %}
-                            <input type="text" name="{{ attribute.name }}" />
-                        {% endif %}
-                    </div>
-                
-                {% endif %}
-            {% endfor %}
-            
+        {# --- Product Title Field --- #}
+        {% if gui_model.get_class_by_name('ProductTitleField') %}
+        <div id="ProductTitleField" class="form-group">
+            <label class="block text-sm font-bold theme-text-muted mb-2">PRODUCT TITLE</label>
+            <input type="text" name="title" placeholder="Enter item name..." 
+                   class="w-full theme-bg-card border theme-border theme-text-main p-4 rounded-xl focus:ring-2 focus:outline-none" />
+        </div>
         {% endif %}
 
-    {% endfor %}
+        {# --- Product Description Field --- #}
+        {% if gui_model.get_class_by_name('ProductDescriptionField') %}
+        <div id="ProductDescriptionField" class="form-group">
+            <label class="block text-sm font-bold theme-text-muted mb-2">PRODUCT DESCRIPTION</label>
+            <textarea name="description" rows="4" 
+                      class="w-full theme-bg-card border theme-border theme-text-main p-4 rounded-xl focus:ring-2 focus:outline-none"></textarea>
+        </div>
+        {% endif %}
+
+        {# --- Listing Type Selector (Auction vs Sale) --- #}
+        {% if gui_model.get_class_by_name('ListingTypeSelector') %}
+        <div id="ListingTypeSelector" class="theme-bg-card border theme-border p-6 rounded-2xl shadow-sm">
+            <h3 class="font-bold text-lg mb-4 theme-text-main">Listing Type</h3>
+            
+            {% if gui_model.get_class_by_name('CheckboxesComponent') %}
+            <div id="CheckboxesComponent" class="flex gap-6">
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" name="is_auction" class="rounded border-gray-300">
+                    <span class="theme-text-main">Auction</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" name="is_sale" class="rounded border-gray-300">
+                    <span class="theme-text-main">Direct Sale</span>
+                </label>
+            </div>
+            {% endif %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                {% if gui_model.get_class_by_name('PriceField') %}
+                <div id="PriceField">
+                    <label class="text-xs font-bold theme-text-muted uppercase">Starting Price</label>
+                    <input type="number" name="price" step="0.01" class="w-full mt-2 theme-bg-card border theme-border p-3 rounded-xl" />
+                </div>
+                {% endif %}
+
+                {% if gui_model.get_class_by_name('AuctionClosingTimeField') %}
+                <div id="AuctionClosingTimeField">
+                    <label class="text-xs font-bold theme-text-muted uppercase">Closing Time</label>
+                    <input type="datetime-local" name="closing_time" class="w-full mt-2 theme-bg-card border theme-border p-3 rounded-xl" />
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {# --- Image Upload Section --- #}
+        {% if gui_model.get_class_by_name('MultipleImagesUploadComponent') %}
+        <div id="MultipleImagesUploadComponent" class="border-2 border-dashed theme-border p-8 rounded-2xl text-center">
+            <p class="theme-text-muted">Drag and drop images here or click to upload</p>
+            <input type="file" multiple class="hidden" id="imageInput">
+            <button type="button" onclick="document.getElementById('imageInput').click()" 
+                    class="mt-4 px-6 py-2 bg-gray-200 rounded-lg font-bold">Select Images</button>
+        </div>
+        {% endif %}
+
+        {# --- Location Field --- #}
+        {% if gui_model.get_class_by_name('LocationField') %}
+        <div id="LocationField" class="form-group">
+            <label class="block text-sm font-bold theme-text-muted mb-2">LOCATION</label>
+            <input type="text" name="location" class="w-full theme-bg-card border theme-border theme-text-main p-4 rounded-xl" />
+        </div>
+        {% endif %}
+
+        {# --- Submit Button --- #}
+        {% if gui_model.get_class_by_name('SubmitListingButton') %}
+        <button id="SubmitListingButton" type="submit" 
+                class="w-full text-white font-bold py-4 rounded-xl shadow-lg transition transform active:scale-95"
+                style="background-color: var(--primary-color);">
+            Create Listing
+        </button>
+        {% endif %}
+
+    </form>
+</div>
 {% endblock %}

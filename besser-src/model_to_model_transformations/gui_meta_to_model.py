@@ -1,4 +1,5 @@
 import json
+import os
 from metamodels.gui_metamodel import domain_model as gui_metamodel
 from besser.BUML.metamodel.structural import (
     Class, Property, Method, Parameter,
@@ -217,7 +218,8 @@ def create_gui_model_from_dsml(dsml_path: str) -> DomainModel:
     return gui_model
 
 if __name__ == "__main__":
-    dsml_path = 'DSML_model.json'
+    dsml_path = os.path.join(os.path.dirname(__file__),'..', 'DSML_model.json')
+    print(f"Loading DSML model from: {dsml_path}\n")
     gui_model = create_gui_model_from_dsml(dsml_path)
     print(f"GUI Model: {gui_model.name}\n")
     # Group classes by type

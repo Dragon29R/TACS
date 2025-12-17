@@ -2,47 +2,42 @@
 
 {% block content %}
 {# --- 1. Setup Context Variables --- #}
-{# Convert model to string for component checking #}
-{% set raw_model = gui_model | string %}
-
-{# Create a shorthand for the specific item data based on your new structure #}
 {% set item = data.item1 %}
 
-<div id="ListingDetailsScreen" class="max-w-4xl mx-auto p-4 space-y-6">
+<div id="ListingDetailsScreen" class="max-w-4xl mx-auto space-y-8">
 
     {# --- Image Section --- #}
-    {% if "Class(MainImageComponent" in raw_model %}
-    <div id="MainImageComponent" class="bg-gray-200 rounded-lg overflow-hidden h-96 flex items-center justify-center shadow-md">
-        {# Use the first image from the 'images' list inside 'details' #}
+    {% if gui_model.get_class_by_name('MainImageComponent') %}
+    <div id="MainImageComponent" class="theme-bg-card rounded-2xl overflow-hidden h-96 flex items-center justify-center shadow-sm border theme-border">
         <img src="{{ item.details.images[0] if item.details.images else 'https://via.placeholder.com/800' }}" 
              alt="Item" class="h-full w-full object-cover" />
     </div>
     {% endif %}
 
-    {% if "Class(ImageGalleryComponent" in raw_model %}
-    <div id="ImageGalleryComponent" class="flex gap-2 overflow-x-auto py-2">
+    {% if gui_model.get_class_by_name('ImageGalleryComponent') %}
+    <div id="ImageGalleryComponent" class="flex gap-3 overflow-x-auto py-2">
         {% if item.details.images %}
             {% for img_url in item.details.images %}
-            <div class="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:opacity-80 transition">
+            <div class="h-24 w-24 flex-shrink-0 rounded-xl overflow-hidden border theme-border cursor-pointer hover:opacity-80 transition theme-bg-card">
                 <img src="{{ img_url }}" class="h-full w-full object-cover" alt="Gallery Image">
             </div>
             {% endfor %}
         {% else %}
-            <div class="h-20 w-20 bg-gray-300 rounded"></div>
+            <div class="h-24 w-24 bg-gray-300 rounded-xl"></div>
         {% endif %}
     </div>
     {% endif %}
 
     {# --- Title & Description --- #}
-    <div class="space-y-2 border-b pb-4">
-        {% if "Class(ProductTitleLabel" in raw_model %}
-        <h1 id="ProductTitleLabel" class="text-3xl font-bold text-gray-900">
+    <div class="space-y-4 border-b theme-border pb-8">
+        {% if gui_model.get_class_by_name('ProductTitleLabel') %}
+        <h1 id="ProductTitleLabel" class="text-3xl md:text-4xl font-extrabold theme-text-main">
             {{ item.details.title if item.details.title else 'Product Title' }}
         </h1>
         {% endif %}
 
-        {% if "Class(ProductDescriptionLabel" in raw_model %}
-        <p id="ProductDescriptionLabel" class="text-gray-600 leading-relaxed">
+        {% if gui_model.get_class_by_name('ProductDescriptionLabel') %}
+        <p id="ProductDescriptionLabel" class="theme-text-muted text-lg leading-relaxed">
             {{ item.details.description if item.details.description else 'No description provided.' }}
         </p>
         {% endif %}
@@ -51,42 +46,48 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {# --- Auction Block --- #}
-        {% if "Class(AuctionDetailsComponent" in raw_model %}
-        <div class="space-y-4">
-            <div id="AuctionDetailsComponent" class="border p-6 rounded-xl bg-blue-50/50 border-blue-100">
-                <h3 class="font-bold text-lg text-blue-900 mb-4">Auction</h3>
+        {% if gui_model.get_class_by_name('AuctionDetailsComponent') %}
+        <div class="space-y-6">
+            <div id="AuctionDetailsComponent" class="theme-bg-card border theme-border p-6 rounded-2xl shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1" style="background-color: var(--primary-color);"></div>
+
+                <h3 class="font-bold text-lg mb-4 theme-text-main">Auction Details</h3>
                 
-                {% if "Class(BidField" in raw_model %}
-                <div class="mb-3">
-                    <label class="text-xs font-semibold text-gray-500 uppercase">Your Bid</label>
+                {% if gui_model.get_class_by_name('BidField') %}
+                <div class="mb-5">
+                    <label class="text-xs font-bold theme-text-muted uppercase tracking-wider">Your Bid</label>
                     <input type="number" id="BidField" placeholder="Enter amount..." 
-                           class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+                           class="w-full mt-2 theme-bg-card border theme-border theme-text-main p-4 rounded-xl focus:ring-2 focus:outline-none transition-shadow"
+                           style="--tw-ring-color: var(--primary-color);" />
                 </div>
                 {% endif %}
 
-                {% if "Class(BidNowButton" in raw_model %}
-                <button id="BidNowButton" class="w-full text-white font-bold py-3 rounded-lg shadow-sm hover:opacity-90 transition" 
-                        style="background-color: {{ dsml.theme.primaryColor }};">
+                {% if gui_model.get_class_by_name('BidNowButton') %}
+                <button id="BidNowButton" class="w-full text-white font-bold py-4 rounded-xl shadow-lg transition transform active:scale-95 hover:brightness-110" 
+                        style="background-color: var(--primary-color);">
                     Place Bid
                 </button>
                 {% endif %}
             </div>
 
             {# --- Bid History List --- #}
-            {# Accessing item.bids directly #}
             {% if item.bids %}
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
-                <div class="bg-gray-50 px-4 py-2 border-b border-gray-200">
-                    <h4 class="text-sm font-semibold text-gray-700">Bid History</h4>
+            <div class="theme-bg-card rounded-2xl border theme-border overflow-hidden shadow-sm">
+                <div class="px-5 py-3 border-b theme-border" style="background-color: var(--bg-color);">
+                    <h4 class="text-sm font-bold theme-text-muted">Recent Activity</h4>
                 </div>
-                <div class="divide-y divide-gray-100">
+                
+                <div class="divide-y theme-border">
                     {% for bid in item.bids | sort(attribute='amount', reverse=True) %}
-                    <div class="flex justify-between items-center p-3 hover:bg-gray-50">
+                    <div class="flex justify-between items-center p-4 transition-colors duration-200"
+                         onmouseover="this.style.backgroundColor='var(--hover-bg)'"
+                         onmouseout="this.style.backgroundColor='transparent'">
+                         
                         <div class="flex flex-col">
-                            <span class="text-sm font-medium text-gray-900">{{ bid.username }}</span>
-                            <span class="text-xs text-gray-400">{{ bid.timestamp }}</span>
+                            <span class="text-sm font-semibold theme-text-main">{{ bid.username }}</span>
+                            <span class="text-xs theme-text-muted">{{ bid.timestamp }}</span>
                         </div>
-                        <span class="font-mono font-bold text-green-600">${{ bid.amount }}</span>
+                        <span class="font-mono font-bold text-green-500 text-lg">${{ bid.amount }}</span>
                     </div>
                     {% endfor %}
                 </div>
@@ -96,21 +97,23 @@
         {% endif %}
 
         {# --- Sale Block --- #}
-        {% if "Class(SaleDetailsComponent" in raw_model %}
-        <div id="SaleDetailsComponent" class="border p-6 rounded-xl bg-white shadow-sm h-fit">
-            <h3 class="font-bold text-lg text-gray-900 mb-4">Buy Now</h3>
+        {% if gui_model.get_class_by_name('SaleDetailsComponent') %}
+        <div id="SaleDetailsComponent" class="theme-bg-card border theme-border p-6 rounded-2xl shadow-sm h-fit relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
 
-            {% if "Class(PriceLabel" in raw_model %}
-            <div class="mb-4">
-                <span class="text-sm text-gray-500">Current Price</span>
-                <div id="PriceLabel" class="text-4xl text-green-600 font-extrabold">
+            <h3 class="font-bold text-lg theme-text-main mb-6">Direct Purchase</h3>
+
+            {% if gui_model.get_class_by_name('PriceLabel') %}
+            <div class="mb-6">
+                <span class="text-sm theme-text-muted">Current Price</span>
+                <div id="PriceLabel" class="text-5xl text-green-500 font-black tracking-tight mt-1">
                     ${{ item.details.price if item.details.price else '0.00' }}
                 </div>
             </div>
             {% endif %}
 
-            {% if "Class(BuyNowButton" in raw_model %}
-            <button id="BuyNowButton" class="w-full bg-green-600 text-white font-bold py-4 rounded-lg hover:bg-green-700 transition shadow-lg shadow-green-100">
+            {% if gui_model.get_class_by_name('BuyNowButton') %}
+            <button id="BuyNowButton" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg shadow-green-500/20 transform active:scale-95">
                 Buy It Now
             </button>
             {% endif %}

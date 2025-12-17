@@ -7,9 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
+            /* Core Theme Variables */
             --primary-color: {{ dsml.theme.primaryColor | default('#3b82f6') }};
             --font-family: {{ dsml.theme.fontFamily | default('sans-serif') }};
             --bg-image: url('{{ dsml.theme.backgroundImage }}');
+
+            /* Default Color Scheme Variables (Light Mode Defaults) */
+            --bg-color: #f3f4f6; /* Gray-100 */
+            --card-bg: #ffffff;
+            --text-color: #1f2937; /* Gray-800 */
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --hover-bg: #f9fafb;
         }
 
         body {
@@ -18,6 +27,16 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Utility classes using CSS variables for child templates */
+        .theme-bg-card { background-color: var(--card-bg); transition: background-color 0.3s; }
+        .theme-text-muted { color: var(--text-muted); }
+        .theme-border { border-color: var(--border-color); }
+        .theme-card-hover:hover {
+            border-color: var(--primary-color);
+            background-color: var(--hover-bg);
         }
 
         #common-header {
@@ -25,21 +44,92 @@
             height: 64px;
             border: none;
             display: block;
-            overflow: hidden;
         }
     </style>
     {% block head %}{% endblock %}
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
 
-    {# Common Screen #}
-    <header class="w-full z-50">
+    {# Common Screen / Navigation Bar #}
+    <header class="w-full z-50 shadow-sm">
         <object id="common-header" type="text/html" data="common.html"></object>
     </header>
-    <main class="flex-grow container mx-auto px-4 py-6">
-        {% block content %}{% endblock %}
+    
+    {# --- MAIN CONTENT HOLDER --- #}
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="theme-bg-card shadow-lg rounded-xl p-6 md:p-8 min-h-[80vh] border theme-border relative">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     {% block scripts %}{% endblock %}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const APP_NAME_PLACEHOLDER = '[APP_NAME_PLACEHOLDER]';
+            const body = document.body;
+            
+            fetch('JSON/app_config.json')
+                .then(response => response.json())
+                .then(config => {
+                    
+                    // 1. Update Title
+                    if (config.text && config.text.appName) {
+                        if (document.title.includes(APP_NAME_PLACEHOLDER)) {
+                             document.title = document.title.replace(APP_NAME_PLACEHOLDER, config.text.appName);
+                        }
+                    }
+
+                    // 2. Apply Theme Variables
+                    const root = document.documentElement;
+                    if(config.theme.primaryColor) root.style.setProperty('--primary-color', config.theme.primaryColor);
+                    if(config.theme.fontFamily) root.style.setProperty('--font-family', config.theme.fontFamily);
+                    
+                    // Dark/Light Mode Logic
+                    if (config.theme.colorScheme === 'Dark') {
+                        root.style.setProperty('--bg-color', '#111827'); // Very dark gray background
+                        root.style.setProperty('--card-bg', '#1f2937');  // Dark gray card
+                        root.style.setProperty('--text-color', '#f9fafb'); // White text
+                        root.style.setProperty('--text-muted', '#9ca3af');
+                        root.style.setProperty('--border-color', '#374151');
+                        root.style.setProperty('--hover-bg', '#374151');
+                    } else {
+                        root.style.setProperty('--bg-color', '#f3f4f6');
+                        root.style.setProperty('--card-bg', '#ffffff');
+                        root.style.setProperty('--text-color', '#1f2937');
+                        root.style.setProperty('--text-muted', '#6b7280');
+                        root.style.setProperty('--border-color', '#e5e7eb');
+                        root.style.setProperty('--hover-bg', '#f9fafb');
+                    }
+
+                    // 3. Update Header/Logo Elements
+                    const headerTitle = document.getElementById('HEADER_TITLE');
+                    if (headerTitle && config.text.communityName) {
+                        headerTitle.textContent = config.text.communityName;
+                    }
+
+                    const logoImage = document.getElementById('APP_LOGO_IMAGE');
+                    if (logoImage && config.theme.logoUrl) {
+                        logoImage.src = config.theme.logoUrl;
+                    }
+
+                    if (config.theme.backgroundImage) {
+                        body.style.backgroundImage = `url('${config.theme.backgroundImage}')`;
+                        body.style.backgroundSize = 'cover';
+                        body.style.backgroundPosition = 'center';
+                        body.style.backgroundAttachment = 'fixed';
+                    }
+                
+                    // 4. Input constraints
+                    const fileInputs = document.querySelectorAll('input[type="file"]');
+                    fileInputs.forEach(input => {
+                        if (config.constraints && config.constraints.maxPhotos) {
+                            input.setAttribute('data-max', config.constraints.maxPhotos);
+                        }
+                    });
+                })
+                .catch(err => console.error('Error loading config:', err));
+        });
+    </script>
 </body>
 </html>
