@@ -1,0 +1,116 @@
+{
+    "current_user_id": "u1",
+    "current_user_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+    "conversations": [
+        {
+            "id": "c1",
+            "partner_name": "Alex Photographer",
+            "partner_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+            "last_message": "Great, I'll see you then!",
+            "last_timestamp": "10:35 AM",
+            "is_online": true,
+            "active": true,
+            "messages": [
+                {
+                    "id": "m1_1",
+                    "sender_id": "u2",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+                    "content": "Hi! Is the Canon 50mm lens still available?",
+                    "timestamp": "10:30 AM"
+                },
+                {
+                    "id": "m1_2",
+                    "sender_id": "u1",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+                    "content": "Yes, it is! Are you interested?",
+                    "timestamp": "10:31 AM"
+                },
+                {
+                    "id": "m1_3",
+                    "sender_id": "u2",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+                    "content": "Definitely. Does it have any scratches on the glass?",
+                    "timestamp": "10:32 AM"
+                },
+                {
+                    "id": "m1_4",
+                    "sender_id": "u1",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+                    "content": "No, it's pristine. I always used a lens.",
+                    "timestamp": "10:32 AM"
+                },
+                {
+                    "id": "m1_5",
+                    "sender_id": "u2",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+                    "content": "Perfect. Can I pick it up today at 5?",
+                    "timestamp": "10:34 AM"
+                },
+                {
+                    "id": "m1_6",
+                    "sender_id": "u1",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+                    "content": "Great, I'll see you then!",
+                    "timestamp": "10:35 AM"
+                }
+            ]
+        },
+        {
+            "id": "c2",
+            "partner_name": "Maria Design",
+            "partner_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+            "last_message": "I can do 50 if you pick it up today.",
+            "last_timestamp": "9:15 AM",
+            "is_online": false,
+            "active": false,
+            "messages": [
+                {
+                    "id": "m2_1",
+                    "sender_id": "u2",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+                    "content": "Hello, I saw your listing for the vintage desk chair.",
+                    "timestamp": "Yesterday"
+                },
+                {
+                    "id": "m2_2",
+                    "sender_id": "u2",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+                    "content": "Would you accept 40 for it?",
+                    "timestamp": "Yesterday"
+                },
+                {
+                    "id": "m2_3",
+                    "sender_id": "u1",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+                    "content": "I can do 50 if you pick it up today.",
+                    "timestamp": "9:15 AM"
+                }
+            ]
+        },
+        {
+            "id": "c3",
+            "partner_name": "GameStore Local",
+            "partner_avatar": null,
+            "last_message": "Does it come with controllers?",
+            "last_timestamp": "Mon",
+            "is_online": true,
+            "active": false,
+            "messages": [
+                {
+                    "id": "m3_1",
+                    "sender_id": "u4",
+                    "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+                    "content": "Is it a 3D controller or normal one?",
+                    "timestamp": "Mon"
+                },
+                {
+                    "id": "m3_2",
+                    "sender_id": "u1",
+                    "sender_avatar": null,
+                    "content": "Normal. It uses standard AA batteries.",
+                    "timestamp": "Mon"
+                }
+            ]
+        }
+    ]
+}
