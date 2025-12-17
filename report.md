@@ -21,6 +21,14 @@ The main methods were also added, particularly for the most important classes in
 
 Lastly, limitations and constraints were added to improve model validity.
 
+Some examples for the constraints are:
+
+- In terms of business logic, we added an OCL invariants to enforce that any bid placed on an auction must be higher than the current highest bid or starting bid, ensuring fair bidding practices.
+
+- In terms of temporal logic, we added an OCL invariant to ensure that an transaction's end date must always be after its start date, preventing illogical timeframes.
+
+- In terms of data quality, we added an OCL invariant to impose that an user's message contents must not be empty, ensuring meaningful communication.
+
 ### 2. DSML Metamodel
 
 We started by looking into how platforms like eBay work with the concept of a User creating an account, that same user can list, check and buy items and everything that revolves around that.
@@ -35,6 +43,8 @@ For this delivery we kept GUI customization were kept to a single class (ThemeCo
 
 With all this considerations we arrived at the following DSML model which gives the user a flexible way to customize their platform.
 
+Regarding the constraints, those were added and enforced, for example, to ensure that a community can only define a list of subCommunities if the allowedSubCommunities attribute flag is set to true, making sure that the GUI reflects the structural model's configurations. Another great example is ensuring the validity on the ItemConfig block, where invariants enforce that numerical limits, such as maxItemPhotos, are within positive ranges, preventing bugs.
+
 
 ### 3. GUI Metamodel
 
@@ -43,6 +53,8 @@ We designed the GUI metamodel in order to provide a flexible but structured basi
 At the center lies the GUIModel class, which is responsible for structuring screens such as LoginScreen, HomeScreen, CreateListingScreen, ListingDetailScreen, AuctionScreen, ProfileScreen, SearchResultsScreen, and ChatScreen. Each screen represents an important function of the system, which is structured by the structural model. Screens are composed of ViewContainers and ViewComponents (such as buttons, forms, and images) in order to be modular and reusable. Specific components, such as Image, Menu, and Form, are used for specific marketplace functionality. Optional components use the “?” notation, in order to handle dynamic contexts; for example, showing a duration field only for an auction listing.
 
 We also standardized component properties using enumerations, such as ScreenType, InputFieldType, and ButtonActionType, for a consistent design vocabulary.
+
+Finally, regarding the constraints, some constraints enforce mandatory composition to ensure functional interfaces and screens, with a example being that the ChatScreen has a multiplicity constraint (1..1) with NewMessageField and SendBUtton, meaning that the screen cannot exist without the ability to input and send text. Another great example isCreateListingScreen being constrained to always include a SubmitListingButton and ProductTitleField, ensuring that users can always finalize and title their listings and preventing the generation of broken forms/screens that users cannot submit/interact with.
 
 ### Model to Model 
 
