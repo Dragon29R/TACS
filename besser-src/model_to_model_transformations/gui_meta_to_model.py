@@ -61,21 +61,15 @@ def build_core_gui(gui_model: DomainModel):
         "TopBarComponent",
         "AppPresentationComponent",
         "FooterComponent",
-        "ProfileContentsComponent",
-        "EditProfileButton",
-        "UsernameField",
-        "PasswordField",
-        "LoginButton",
         "ListingsListComponent",
         "EnterListingComponent",
-        "ListingsFilterButton",
         "TransactionListComponent",
         "TransactionCardComponent",
-        "ImageGalleryComponent",
         "MainImageComponent",
         "ProductTitleLabel",
         "ProductDescriptionLabel",
-        "ViewListingsButton"
+        "ViewListingsButton",
+        "CreateListingButton"
     ]
 
     # Mandatory listing components
@@ -83,9 +77,7 @@ def build_core_gui(gui_model: DomainModel):
     listing_form_components = [
         "ProductTitleField",
         "ProductDescriptionField",
-        "SubmitListingButton",
-        "ListingTypeSelector",
-        "CheckboxesComponent"
+        "SubmitListingButton"
     ]
     add_gui_elements(listing_form_components, gui_model, gui_metamodel)
 
@@ -111,29 +103,35 @@ def build_auth_gui(app_block, gui_model: DomainModel):
         add_gui_elements(auth_components, gui_model, gui_metamodel)
 
 def build_exchange_type_gui(app_block, gui_model: DomainModel):
-    item_config = app_block['inputs']['ITEMCONFIG']['block']
+    item_config_block = app_block['inputs']['ITEMCONFIG']['block']
+    item_config_fields = item_config_block['fields']
     
     exchange_types = set()
     
     # Extract from DSML
-    if 'ITEMEXCHANGE' in item_config.get('inputs', {}):
-        current = item_config['inputs']['ITEMEXCHANGE']['block']
+    if 'ITEMEXCHANGE' in item_config_block.get('inputs', {}):
+        current = item_config_block['inputs']['ITEMEXCHANGE']['block']
         while current:
             exchange_type = current['fields']['name']
             exchange_types.add(exchange_type)
             current = current.get('next', {}).get('block')
     
+    if len(exchange_types) > 1:
+        add_gui_elements(["ListingTypeSelector", "CheckboxesComponent"], gui_model, gui_metamodel)
+
     if "Auction" in exchange_types:
         auction_components = [
             "AuctionCardComponent",
             "AuctionDetailsComponent",
             "BidField",
             "BidNowButton",
-            "AuctionCheckbox",
-            "AuctionClosingTimeField",
-            "ViewAuctionsButton"
+            "AuctionCheckbox"
         ]
         add_gui_elements(auction_components, gui_model, gui_metamodel)
+        
+        if item_config_fields.get("enableBiddingTimer") == "True":
+             add_gui_elements(["AuctionClosingTimeField"], gui_model, gui_metamodel)
+
     if "BuyNow" in exchange_types or "Free" in exchange_types:
         sale_components = [
             "SaleCardComponent",
@@ -141,8 +139,7 @@ def build_exchange_type_gui(app_block, gui_model: DomainModel):
             "BuyNowButton",
             "PriceLabel",
             "SaleCheckbox",
-            "PriceField",
-            "ViewSalesButton"
+            "PriceField"
         ]
         add_gui_elements(sale_components, gui_model, gui_metamodel)
     if "Exchange" in exchange_types:
@@ -152,8 +149,7 @@ def build_exchange_type_gui(app_block, gui_model: DomainModel):
             "ExchangeNowButton",
             "ExchangeCheckbox",
             "PreferedExchangeTypeField",
-            "ProposedExchangeField",
-            "ViewExchangesButton"
+            "ProposedExchangeField"
         ]
         add_gui_elements(exchange_components, gui_model, gui_metamodel)
 
@@ -166,7 +162,9 @@ def build_features_gui(app_block, gui_model: DomainModel):
             "MessageListComponent",
             "NewMessageField",
             "SendButton",
-            "MessageCardComponent"
+            "MessageCardComponent",
+            "ChatButton",
+            "ConversationsListComponent"
         ]
         add_gui_elements(chat_components, gui_model, gui_metamodel)
     if features.get('enableRatings') == "True":
@@ -191,6 +189,9 @@ def build_item_config_gui(app_block, gui_model: DomainModel):
     
     if item_config.get('enableItemLocation') == "True":
         add_gui_elements(["LocationField"], gui_model, gui_metamodel)
+        
+    if item_config.get('enableItemCategories') == "True" or item_config.get('enableItemLocation') == "True":
+         add_gui_elements(["ListingsFilterButton"], gui_model, gui_metamodel)
     
     max_photos = item_config.get('maxItemPhotos', '1')
     try:
@@ -200,6 +201,7 @@ def build_item_config_gui(app_block, gui_model: DomainModel):
     
     if max_photos_int > 1:
         add_gui_elements(["MultipleImagesUploadComponent"], gui_model, gui_metamodel)
+        add_gui_elements(["ImageGalleryComponent"], gui_model, gui_metamodel)
     else:
         add_gui_elements(["SingleImageUploadComponent"], gui_model, gui_metamodel)
 

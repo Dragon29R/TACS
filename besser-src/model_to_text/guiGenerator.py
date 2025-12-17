@@ -79,6 +79,11 @@ class GuiGenerator(GeneratorInterface):
                     except Exception as e:
                         print(f"- Warning: Failed to load mock data: {e}")
 
+            #rename_component(self.model, "SaleDetailsComponent", "SaleDetailsComponent_HIDDEN")
+            #rename_component(self.model, "AuctionDetailsComponent", "AuctionDetailsComponent_HIDDEN")
+            #rename_component(self.model, "MainImageComponent", "MainImageComponent_HIDDEN")
+            #rename_component(self.model, "ListingTypeSelector", "ListingTypeSelector_HIDDEN")
+            
             context = {
                 "screen": screen,
                 "gui_model": self.model, 
