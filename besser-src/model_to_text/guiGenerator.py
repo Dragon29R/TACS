@@ -79,6 +79,7 @@ class GuiGenerator(GeneratorInterface):
             #rename_component(self.model, "SaleDetailsComponent", "SaleDetailsComponent_HIDDEN")
             #rename_component(self.model, "AuctionDetailsComponent", "AuctionDetailsComponent_HIDDEN")
             #rename_component(self.model, "MainImageComponent", "MainImageComponent_HIDDEN")
+            #rename_component(self.model, "ListingTypeSelector", "ListingTypeSelector_HIDDEN")
 
 
             context = {
