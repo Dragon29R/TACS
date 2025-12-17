@@ -55,16 +55,19 @@ class GuiGenerator(GeneratorInterface):
         file_name = self._camel_to_snake(screen.name)
         base_name = file_name.replace('_screen', '')
         file_name = f"{base_name}.html"
-        template_name = f"{file_name}.jinja2"
+        
+        # Define primary template and fallback template
+        primary_template = f"{file_name}.jinja2"
+        fallback_template = "not_found.html.jinja2"
+        
+        target_template = primary_template
+
+        # Check if the specific template exists
+        if not os.path.exists(os.path.join(self.template_dir, primary_template)):
+            print(f"Warning: Template not found for {screen.name}: {primary_template}. Generating 404 page instead.")
+            target_template = fallback_template
 
         try:
-            if not os.path.exists(os.path.join(self.template_dir, template_name)):
-                print(f"Error: Template not found for {screen.name}: {template_name}")
-                return
-
-            template = self.env.get_template(template_name)
-            
-            # Load mock data
             mock_data = {}
             if self.mocks_dir:
                 mock_file = os.path.join(self.mocks_dir, f"{base_name}.json")
@@ -76,23 +79,25 @@ class GuiGenerator(GeneratorInterface):
                     except Exception as e:
                         print(f"- Warning: Failed to load mock data: {e}")
 
-            #rename_component(self.model, "SaleDetailsComponent", "SaleDetailsComponent_HIDDEN")
-            #rename_component(self.model, "AuctionDetailsComponent", "AuctionDetailsComponent_HIDDEN")
-            #rename_component(self.model, "MainImageComponent", "MainImageComponent_HIDDEN")
-            #rename_component(self.model, "ListingTypeSelector", "ListingTypeSelector_HIDDEN")
-
-
             context = {
-                "screen": screen, # Class API used for interaction in templates
+                "screen": screen,
                 "gui_model": self.model, 
-                "dsml": self.dsml_config, # Dictionary with DSML config
-                "data": mock_data # Mock data
+                "dsml": self.dsml_config,
+                "data": mock_data
             }
 
+            try:
+                template = self.env.get_template(target_template)
+                rendered_content = template.render(**context)
+            except Exception as e:
+                print(f"Error: Failed to render {target_template} for {screen.name}: {e}")
+                if target_template != fallback_template:
+                    print(f"Attempting to render fallback {fallback_template}...")
+                    template = self.env.get_template(fallback_template)
+                    rendered_content = template.render(**context)
+                else:
+                    return
 
-
-            rendered_content = template.render(**context)
-            
             output_path = os.path.join(self.output_dir, file_name)
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(rendered_content)
@@ -100,7 +105,7 @@ class GuiGenerator(GeneratorInterface):
             print(f"Generated: {output_path}")
 
         except Exception as e:
-            print(f"Error: Failed to generate {screen.name}: {e}")
+            print(f"Error generating {screen.name}: {e}")
 
     def _camel_to_snake(self, name):
         name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
