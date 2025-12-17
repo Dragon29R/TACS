@@ -14,6 +14,7 @@ OUTPUT_DIR = os.path.join(BASE_DIR, 'output')
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'jinja', 'templates')
 CONFIG_OUTPUT_DIR = os.path.join(OUTPUT_DIR, 'JSON')
 APP_CONFIG_FILE = os.path.join(CONFIG_OUTPUT_DIR, 'app_config.json')
+MOCKS_DIR = os.path.join(BASE_DIR, 'mocks')
 
 try:
     from model_to_model_transformations.structural_meta_to_model import create_domain_model_from_dsml
@@ -57,13 +58,19 @@ def main():
     else:
         print("- Error: App config file was not created.")
 
+    output_mocks_path = os.path.join(OUTPUT_DIR, 'mocks')
+    if os.path.exists(MOCKS_DIR):
+        print(f"Copying mocks to {output_mocks_path}...")
+        shutil.copytree(MOCKS_DIR, output_mocks_path)
+    
     # Model-to-Text Code Generation
     print("\nRunning Besser Generator...")
     generator = GuiGenerator(
         model=gui_model,
         dsml_config=dsml_config,
         output_dir=OUTPUT_DIR,
-        template_dir=TEMPLATES_DIR
+        template_dir=TEMPLATES_DIR,
+        mocks_dir=MOCKS_DIR
     )
     
     generator.generate()

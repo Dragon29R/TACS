@@ -1,0 +1,31 @@
+{
+    "title": "Team Alpha",
+    "partner": {
+        "name": "Sarah Engineer",
+        "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+        "is_online": true
+    },
+    "current_user_id": "u1",
+    "messages": [
+        {
+            "id": "m1",
+            "sender_id": "u2",
+            "sender_avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+            "content": "Hey! Did you update the generator?",
+            "timestamp": "10:30 AM"
+        },
+        {
+            "id": "m2",
+            "sender_id": "u1",
+            "sender_avatar": null,
+            "content": "Yes, I added the mock data support just now.",
+            "timestamp": "10:32 AM"
+        },
+        {
+            "id": "m3",
+            "sender_id": "u2",
+            "content": "Awesome, looking forward to the preview.",
+            "timestamp": "10:33 AM"
+        }
+    ]
+}

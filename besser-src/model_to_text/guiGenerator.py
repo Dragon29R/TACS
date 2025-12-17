@@ -1,14 +1,16 @@
 import os
 import re
+import json
 from besser.generators import GeneratorInterface
 from besser.BUML.metamodel.structural import DomainModel, Class
 from jinja2 import Environment, FileSystemLoader
 
 class GuiGenerator(GeneratorInterface):
-    def __init__(self, model: DomainModel, output_dir: str, dsml_config: dict, template_dir: str):
+    def __init__(self, model: DomainModel, output_dir: str, dsml_config: dict, template_dir: str, mocks_dir: str = None):
         super().__init__(model, output_dir=output_dir)
         self.dsml_config = dsml_config
         self.template_dir = template_dir
+        self.mocks_dir = mocks_dir
         self.env = Environment(loader=FileSystemLoader(self.template_dir))
 
     def generate(self, *args):
@@ -32,8 +34,8 @@ class GuiGenerator(GeneratorInterface):
         Generates a HTML page for a given Screen class
         """
         file_name = self._camel_to_snake(screen.name)
-        file_name = file_name.replace('_screen', '') + ".html"
-        # LoginScreen -> login.html.jinja2
+        base_name = file_name.replace('_screen', '')
+        file_name = f"{base_name}.html"
         template_name = f"{file_name}.jinja2"
 
         try:
@@ -42,9 +44,24 @@ class GuiGenerator(GeneratorInterface):
                 return
 
             template = self.env.get_template(template_name)
+            
+            # Load mock data
+            mock_data = {}
+            if self.mocks_dir:
+                mock_file = os.path.join(self.mocks_dir, f"{base_name}.json")
+                if os.path.exists(mock_file):
+                    try:
+                        with open(mock_file, 'r', encoding='utf-8') as f:
+                            mock_data = json.load(f)
+                        print(f"- Loaded mock data from {mock_file}")
+                    except Exception as e:
+                        print(f"- Warning: Failed to load mock data: {e}")
+
             context = {
                 "screen": screen, # Class API used for interaction in templates
-                "dsml": self.dsml_config # Dictionary with DSML config
+                "gui_model": self.model, 
+                "dsml": self.dsml_config, # Dictionary with DSML config
+                "data": mock_data # Mock data
             }
 
             rendered_content = template.render(**context)
